@@ -7,6 +7,7 @@
 \usepackage{amsthm}
 \usepackage{braket}
 \usepackage{mathtools}
+\usepackage{soul}
 
 \newcommand{\bbR}{\mathbb{R}}
 \newcommand{\bbN}{\mathbb{N}}
@@ -34,4 +35,176 @@
 \begin{document}
 
 \maketitle
+\setuldepth{convex}
+
+\section*{Product topology}
+Let $X$ and $Y$ be topological spaces, with open sets $O_X$ and $O_Y$ respectively. We can define a topology on their Cartesian product, called the \ul{product topology}, as follows:
+\begin{define}
+	A basis for the product topology on $X \times Y$ is $B_{X \times Y} \vcentcolon = O_X \times O_Y$.
+	\newline
+	SO if $u \in O_X$ and $v \in O_Y$, then $u \times v$ is open in $X \times Y$.
+\end{define}
+
+\begin{rmk}
+	The converse need not hold.
+\end{rmk}
+
+\begin{eg}
+	$\bbR \times \bbR$, or $\bbR^3$. IN $\bbR \times \bbR$, the complement of the ``diagonal'' $\Set{(x, x)| x \in \bbR}$ is open (Exercise) but it is not of the form $u \times v$ for $u,v$ open in $\bbR$.
+\end{eg}
+\begin{eg}
+	Remains
+\end{eg}
+
+\section*{Connectedness}
+\begin{define}
+	A topological space $X$ is connected if it cannot be expressed as the union of two non-empty, disjoint open sets.
+\end{define}
+\begin{eg}
+	$X = [0, 1] \cup (3,4)$ is disconnected (subspace topology).
+	\newline
+	$[0,1]$ is open because $[0, 1] = (-\frac{1}{2}, \frac{1}{2} + 1)$ is intersection of $X$ is intersection of $X$ and an open set in $\bbR$. Therefore $X$ is union of $[0,1]$ and $(3,4)$, which are both open and mutually disjoint.
+\end{eg}
+
+Equivalently, $X$ is connected if it cannot be expressed as the union of two nonempty, disjoint closed sets.
+\newline
+Equivalently, $X$ is connected iff the only subsets of $X$ that are both open and closed are $\varnothing$ and $X$.
+
+\begin{eg}
+	$\bbQ \subseteq \bbR$ is disconnected, because 
+	\begin{equation*}
+		\bbQ = (\bbQ \cap (-\infty, \sqrt{2})) \cup (\bbQ \cap (\sqrt{2}, \infty))
+	\end{equation*}
+\end{eg}
+
+\begin{rmk}
+	Is $[0, 1]$ connected in $\bbR_{\text{metric}}$? What about $(0, 1)$?
+\end{rmk}
+
+\begin{thm}
+	Every single interval (open, closed, or half-open) is connected in $\bbR_{\text{metric}}$
+\end{thm}
+
+\begin{proof}
+	We will prove it for closed intervals for simplicity.
+	\newline
+	Let $X = [a, b]$. If $a = b$, $X$ is a singleton, so is connected.
+	\newline
+	Suppose $a \neq b$ so $a < b$
+	\newline
+	Suppose that $X = A \cup B$, where $A$ and $B$ are both clopen and $A$ is not empty. We need to show $B$ has to be $\varnothing$.
+	Let's also suppose, WLOG, $a \in A$. First of all, $A$ is open in $X$, so 
+	\begin{equation*}
+		A = [a, b] \cap U \text{ , where } U \text{ is open in } \bbR
+	\end{equation*}
+	Also, $a \in A \implies a \in U$. Since $U$ is open, $\exists \varepsilon $ sufficiently small $\suchthat (a-\varepsilon, a+\varepsilon) \subseteq U$.
+	Then $(a-\varepsilon, a+\varepsilon) \cap [a, b] \subseteq A \implies [a, a+\varepsilon] \subseteq A$.
+	\newline
+	Define the set 
+	\begin{equation*}
+		C = \Set{c \in [a, b]| [a, c] \subseteq A}
+	\end{equation*}
+	Clearly $C$ has an upper bound, namely $b$. Therefore $c$ has a least upper bound $L \leqslant b$.
+	\newline
+	Now we are going to show that $L \in C$.
+	\newline
+	$L$ is a limit point of $A$. $L \in X$ because $a < L \leqslant b$. $A$ is clopen in $X$ so $A$ is closed in $X$, so $L \in A \implies [a, L] \subseteq A$.
+	\newline
+	Now we show that $L = b$. Suppose, for contradiction,  $L < b$.
+	\newline
+	As $L\in A$ and $A$ is open in $X$, $\exists \varepsilon > 0 \suchthat [L, \varepsilon) \subseteq A$. Therefore,$[L, \varepsilon] \subseteq A$ since $A$ is closed, indicating $L + \varepsilon \in C$. However, $L = \sup(C)$. Contradiction. 
+	$\therefore L = b$.
+	\newline
+	Therefore, the whole proof implies $A = X$ and $B = \varnothing$. Accordingly,  any closed interval is connected in $R_{\text{metric}}$.
+\end{proof}
+
+\section*{Path-connectedness}
+Now that we know that $[0,1]$ is connected, we use it define another notion.
+
+\begin{define}
+	A space $X$ is path-connected if $\forall x,b \in X$, there is a ``path'' from $a$ to $b$. That is, if there is a continuous function $f:[0,1] \mapsto X$ with $f(0) = a$ and $f(1) = b$.
+\end{define}
+
+\begin{rmk}
+	[0, 1] is a ``stand-in'' for any other closed interval because [0,1] and [a, b] are homeomorphic for any $p \neq q$. (Exercise)
+\end{rmk}
+
+\begin{prop}
+	If $X$ is path-connected, then it is connected.
+\end{prop}
+
+\begin{proof}
+	Suppose for contradiction, that $X$ is path-connected but not connected so $X = A \cup B$, $A \neq \varnothing$, $B \neq \varnothing$, $A \cap B = \varnothing$, and $A,B$ is open.
+	\newline
+	Let $a \in A$ and $b \in B$. Thre is some $f:[0,1] \implies X \suchthat$
+	\begin{equation*}
+		f(0) = a \text{ and } f(1) = b 
+	\end{equation*}
+	So, consider $f^{-1}(A)$ and $f^{-1}(B)$. Not that $f^{-1}(A)$ and $f^{-1}(B)$ are open, because $f$ is continuous. They are also nonempty and disjoint (because if $x\in f^{-1}(A)$ and if $x \in f^{-1}(B)$, then $f(x) \in A \cup B$).
+	\newline
+	Also, $f^{-1}(A) \cup f^{-1}(B) = [0, 1]$. This contradicts the fact that $[0,1]j$ is connected.
+\end{proof}
+
+This gives an easy chance to see if spaces are connected.
+
+\begin{eg}
+	\hfill
+	\newline
+	Circle in $\bbR^2$ is connected.
+	\newline
+	$\forall n\in \bbN^{+},\quad \bbR^n$ is connected.
+	\newline
+	Any interval is connected because it is path connected. We can consider
+	\begin{equation*}
+		f(t) \vcentcolon = (1-t)a + tb \quad\quad(0\leqslant t \leqslant 1)
+	\end{equation*}
+\end{eg}
+
+\begin{prop}
+	If $X \subseteq \bbR^n$ is \ul{convex}, it is connected.
+\end{prop}
+
+\begin{rmk}
+	There exist connected spaces that are not path-connected! A counterexample is sine curve,
+	\begin{equation*}
+		\Set{\left(x,\sin\left(\frac{1}{x}\right)\right)| x\in (0, 1]} \cup \Set{(0,0)}
+	\end{equation*}
+\end{rmk}
+
+\begin{prop}
+	Let $f: X \mapsto Y$ be continuous and surjective. Then:
+	\begin{enumerate}[(1)]
+		\item If $X$ is connected, so is $Y$.
+		\item If $X$ is path-connected, so is $Y$.
+	\end{enumerate}
+\end{prop}
+
+Now we can compare spaces and distinguish them.
+
+\begin{cor}
+	If $X$ and $Y$ are homeomorphic, then 
+	\begin{enumerate}[(1)]
+		\item X is connected iff Y is connected.
+		\item X is path-connected iff Y is path-connected.
+	\end{enumerate}
+\end{cor}
+
+This can be used to deduce (for example) that $\bbR$ is not homeomorphic to $\bbR^n$ for $n > 1$.
+
+\begin{define}[Connected Component]
+	Let $X$ be a space and $x \in X$. The connected component of $x \in X$ is the union of all connected subspace of $X$ containing $x$, denoted by $C_x$. Especially, $X$ is itself connected.
+\end{define}
+
+\begin{define}[Path Components]
+	Let X be a space and $x \in X$. The path component of $x$ is the set of all $y\in X \suchthat$ there is a path from $x$ to $y$, called $P_x$.
+\end{define}
+
+\begin{rmk}
+	Say $x {\sim}_{c} y$ if $C_x = C_y$; 
+	\newline
+	$x {\sim}_{p} y$ if $P_x = P_y$.
+	\newline
+	Then these are equivalent relations.
+\end{rmk}
+
 \end{document}
