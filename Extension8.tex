@@ -1,0 +1,184 @@
+\documentclass[12pt]{amsart}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{paralist}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{braket}
+\usepackage{mathtools}
+\usepackage{soul}
+
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbZ}{\mathbb{Z}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\suchthat}{\operatorname{s.t.}}
+\newcommand{\ie}{\operatorname{i.e.}}
+\newcommand{\LL}{\operatorname{LL}}
+
+\theoremstyle{plain}
+\newtheorem*{prop}{Proposition}
+\newtheorem*{thm}{Theorem}
+\newtheorem*{cor}{Corollary}
+\newtheorem*{claim}{Claim}
+\newtheorem*{axm}{Axiom}
+\newtheorem*{lem}{Lemma}
+
+
+\theoremstyle{remark}
+\newtheorem*{rmk}{Remark}
+
+\theoremstyle{definition}
+\newtheorem*{define}{Definition}
+\newtheorem*{eg}{Example}
+
+\title{Analysis I Extension Lecture 8}
+\author{Asilata Bapat}
+
+\begin{document}
+
+\maketitle
+\setuldepth{basis}
+
+\section*{Basis for Topological Space}
+\begin{define}
+	Let $(X, O)$ be a topological space. A subset $B \subseteq O$ is called a \ul{basis} for this topology if:
+	\begin{enumerate}[a)]
+	\item Every $v \in O$ is a union of elements from $B$. Consequently,
+	\item For every $u\in O$, there is some $v \in B \suchthat v \subseteq u$  
+	\end{enumerate}
+\end{define}
+
+\begin{eg}
+	For $X = \bbR$ as before, we can take $B = \Set{v|v \text{ is open interval in } \bbR}$. 
+\end{eg}
+
+In fact we can define define the topological space by specifying a basis $B$, the set $O$ then consist of all possible unions of elements of $B$.
+
+\begin{eg}[Lower-Limit Topology]
+	Once again take $X = \bbR$, but we take a different $O$:
+	\newline
+	Set $B = \Set{[a,b)| a,b\in \bbR}$, so that $O$ consists of unions of these half-open intervals. This is called the \ul{lower-limit topology } on $\bbR$.
+\end{eg}
+
+\begin{prop}
+	Any interval $(a,b)$ is open in the lower limit topology. Therefore, any set open in the usual metric topology is open in the Lower Limit topology on $\bbR$.	
+\end{prop}
+
+\begin{proof}
+	Consider the intervals $\left[a + \frac{1}{n}, b\right)$ for $n \geqslant 1$. These are open in $\bbR, O_{\LL}$. Their union is all points of $(a,b) \implies (a, b)$ is open in $R_{LL}$.
+	\newline
+\end{proof}
+
+$O_{\text{metric}} \subseteq O_{\LL}$ because $B_{\text{metic}} \subseteq B_{\LL}$. We say that the lower-limit topology is \ul{finer} than the metric topology - it has more sets.
+	\begin{rmk}
+		Is $O_{\text{metric}} = O_{\LL}$? Specifically, IS $[a, b)$ open in $\bbR_{\text{metric}}$?
+		\newline
+		To answer this, we will need some more definitions and lemmas 
+	\end{rmk}
+
+	\begin{define}
+		Given $(X, O)$, we say that $Y \subseteq X$ is \ul{closed} [in this topology] if $X - Y$ is open; $\ie X - Y \in O$ 
+	\end{define}
+
+	We have the following analogies of the axioms in terms of closed sets: 
+	
+	\begin{axm}
+		If $\Phi$ is the set of all closed sets, then
+		\begin{enumerate}[(1)]
+			\item $\varnothing \in \Phi$ and $X \in \Phi$.
+			\item Arbitrary intersections of closed sets are closed.
+			\item \ul{Finite} unions of closed sets are closed.
+		\end{enumerate}
+	\end{axm}
+
+	\begin{define}[Interior, Boundary, and Limit point]
+Let $A \subseteq X$, and suppose that $x \in X$. Then there is the following trichotomy:
+\begin{enumerate}[(1)]
+	\item $\exists u \in O \suchthat x \in u $ and $u \subseteq A$, or
+	\item $\exists u \in O \suchthat x \in u $ and $u \subseteq X - A$, or
+	\item $\forall u \in O \suchthat x \in u $, we have $u \cap A \neq \varnothing$ and $u \cap (X - A) \neq \varnothing$.
+\end{enumerate}
+If $(1)$ holds, we say $x$ is in the \ul{interior} of $A$.
+\newline
+If $(2)$ holds, we say $x$ is in the \ul{interior} of $X - A$.
+\newline
+If $(3)$ holds, we say $x$ is in the \ul{boundary} of $X$ and $X - A$.
+\newline
+
+The set of all points where either $(1)$ and $(3)$ holds, $\ie$ $\operatorname{interior}(A) \cup \operatorname{boundary}(A)$ is called the set of \ul{limit points} of $A$.
+\end{define}
+\begin{eg}
+	In $\bbR_{\text{metric}}$, let $A = [a, b)$, where $a < b$, then
+	\begin{enumerate}
+		\item $\operatorname{int}(A) = (a, b)$
+		\item $\operatorname{boundary}(A) = \Set{a, b}$
+		\item $\operatorname{int}(X-A) = (-\infty, a) \cup (b, \infty)$
+	\end{enumerate}
+\end{eg}
+
+\begin{define}[Closure]
+	The set of limit point of $A\subseteq X$ is called the closure of $A$, denoted by $\overline{A}$.
+\end{define}
+
+\begin{prop}
+	Let $A \subset X$, then
+	\begin{enumerate} [(a)]
+		\item $\operatorname{int}(A)$ is open.
+		\item $\overline{A}$ is closed.
+		\item $A$ is open iff $A = \operatorname{int}(A)$.
+		\item $A$ is closed iff $A = \overline{A}$.
+	\end{enumerate}
+\end{prop}
+
+\begin{rmk}
+	$O_{\LL} \not\subseteq O_{\text{metric}}$ since $[a, b)$ is not the union of open intervals.
+	\newline
+	What are some closed sets of $R_{\LL}$?
+	\newline
+	Does there exists a metric on $\bbR$ whose associated topology is $(\bbR, O_{\LL})$?  
+\end{rmk} 
+
+\begin{eg}[Finite-Complement Topology]
+
+	Let $X = \bbR$, and let
+	\begin{equation*}
+		O = \Set{Y \subseteq X | X - Y \text{ is finite}}
+	\end{equation*}
+	Such topological space is called Complement-finite topology.
+\end{eg}
+
+\section*{Subspace Topology}
+If $(X, O)$ is a topological space and $Y \subseteq X$ is any set, we can define a topology on $Y$ as follows:
+\begin{equation*}
+	O_Y = \Set{u\subset Y | \exists v \in O \text{ where } u = v \cap Y}
+\end{equation*}
+In this case, we say $Y$ is a \ul{subspace} of $X$.
+\begin{lem}
+	Given $Y \subset X$ a subspace, and any $A \subseteq Y$, the closure of $A$ in $Y$ is $\overline{A} \cap Y$.
+\end{lem}
+
+\begin{proof}
+	Let $y$ be a limit point of $A$ in $Y$, then there exists an open set $u_Y$ of $Y \suchthat y \in Y$ and $u_Y \cap A \neq \varnothing$. But $A \subseteq Y$, and $u_Y$ for some open $v$ of $X$. So $u_Y \cap A = (v\cap Y)\cap A = v \cap A$. But $y$ is in $\overline{A}$ so $\forall v \in O \suchthat y \in v$, we have $v \cap A \neq \varnothing$.   
+\end{proof}
+
+\section*{Functions and Continuity}
+\begin{define}[Continuity]
+	Let $X$ and $Y$ be topological space. A function $f: X \mapsto Y$ is to be \ul{continuous} if $\forall v$ open in $Y$, we have $f^{-1}(Y)$ is open in $X$.
+	\newline
+	Equivalently, $\forall Z \subset Y$ closed, $f^{-1}(Z)$ is closed in $X$.
+	Equivalently, given $B_Y$, for all $v \subseteq Y \suchthat v \in B_Y$, $f^{-1}(v)$ is open in $X$. 
+\end{define}
+
+\begin{lem}
+	If $f:X \mapsto Y$ and $g: Y \mapsto Z$ are continuous, then $(gf):X \mapsto Z$ is also continuous.
+\end{lem}
+
+\begin{lem}
+	If $f:X \mapsto Y$ is continuous and $A \subseteq X$ is a subspace, then $f|_A: A \mapsto Y$ is continuous.
+\end{lem}
+\begin{define}[Homeomorphism]
+	A continuous map $f:X \mapsto Y$ is a \ul{homeomorphism} if it is one-to-one and onto, and also $f^{-1}:Y \mapsto X$ is continuous.
+\end{define}
+\end{document}
