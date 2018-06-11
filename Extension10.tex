@@ -1,0 +1,216 @@
+\documentclass[12pt]{amsart}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{paralist}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{braket}
+\usepackage{mathtools}
+
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbZ}{\mathbb{Z}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\suchthat}{\operatorname{s.t.}}
+\newcommand{\ie}{\operatorname{i.e.}}
+
+\theoremstyle{plain}
+\newtheorem*{prop}{Proposition}
+\newtheorem*{thm}{Theorem}
+\newtheorem*{cor}{Corollary}
+\newtheorem*{claim}{Claim}
+
+\theoremstyle{remark}
+\newtheorem*{rmk}{Remark}
+
+\theoremstyle{definition}
+\newtheorem*{define}{Definition}
+\newtheorem*{eg}{Example}
+
+\title{Analysis I Extension Lecture 10}
+\author{Asilata Bapat}
+
+\begin{document}
+\maketitle
+
+\section*{Connectedness}
+\begin{prop}
+	Every path-connected space is connected. In particular, every interval in $\bbR$ is connected.
+\end{prop}
+
+These notions let us distinguish spaces from each others. Recall:
+
+\begin{thm}
+	Let $f:X\mapsto Y$ be continuous and surjective, 
+\begin{enumerate}[(1)]
+\item If $X$ is connected, then $Y$ is connected.
+\item If $X$ is path-connected, then $Y$ is path connected. 
+\end{enumerate}
+
+In particular, if $f:X\mapsto Y$ is a homeomorphism, then $X$ is connected (resp. path-connected) iff $Y$ is connected (resp. path-connected)
+\end{thm}
+
+\begin{prop}
+$\bbR$ is not homeomorphic to $\bbR^n$ for any $n > 1$
+\end{prop}
+
+\begin{proof}
+Suppose $f:\bbR\mapsto \bbR^n$ is a homeomorphism. Then $f:\bbR - \Set{0} \mapsto \bbR^n - \Set{f(0)}$ is a homeomorphism.
+$\bbR - \Set{0}$ is neither connected nor path-connected. But $\bbR^n - \Set{f(0)}$ is path-connected. Contradiction. 
+\end{proof}
+
+\section*{Compactness}
+Compactness is a property (like connectedness) that some topological spaces have but others don't.
+\begin{define}[Open Cover]
+An open cover of a space $X$ is a collection of open sets whose union is $X$.
+\end{define}
+
+\begin{define}[Connectness]
+A topological space $X$ is called compact if \underline{every} open cover of $X$ has a \underline{finite} subcover.
+\end{define}
+
+\begin{eg}
+$\bbR$ is not compact. Consider the open covers $(n, n+2)$ for $n \in \bbZ$.
+\end{eg}
+\begin{rmk}
+If $Y \subseteq X$, sometimes we specify an open cover of $Y$ by giving a set $\Set{u_{\alpha}}_{\alpha \in I}$ of open sets of $X$,whose union contains $Y$.
+\end{rmk}
+
+This suggests that a noncompact space is one that can ``escape out to infinity''. But seemingly finite spaces can also be noncompact. 
+
+\begin{eg}
+$(0,1)$ is not compact; consider the open cover $(\frac{1}{n}, \frac{1}{n+2})$ for $n \in \bbN$ and $n \geqslant 1$. This has no finite subcover.
+\end{eg}
+
+\newpage
+\begin{thm}
+In the metric topology on $\bbR$, any closed interval $[a, b]$ is compact.
+\end{thm}
+
+\begin{proof}
+If $a = b$, then $[a, b] = {a}$; this is compact because any finite set is compact.
+\newline
+If $a \neq b$, consider an open cover $\{u_{\alpha}\}_{\alpha \in I}$ of $[a, b]$.
+\newline
+Let $a \in u_{\alpha}$ for some $\alpha$. Since $u_{\alpha}$ is open, $\exists$ some $c \leqslant b \suchthat [a, c] \subseteq u_{\alpha}$. If $c = b$, then we are done; Otherwise, let 
+\begin{equation*}
+C = \Set{x \in (a, b] | [a, x] \text{ is contained in a finite union of the sets } u_{\beta}}
+\end{equation*}
+Notice that $c \in C$ so $C \neq \varnothing$. Clearly $C$ is bounded above by $b$. Let $L = \sup(C)$.
+
+\begin{proof}[Pf: $L \in C$]
+\hfill
+\newline
+Let $L \in u_{\beta}$, and suppose $L\notin C$. Then $[a, L]$ cannot be covered by finitely many sets $u_{\beta} \in \Set{u_{\alpha}}_{\alpha \in I}$. But if $L \in u_{\beta}$ and $u_{\beta}$ is open, there is some $\varepsilon \suchthat [L - \varepsilon, L] \subseteq u_{\beta}$.
+\newline
+Since $L = \sup(C)$, $L-\varepsilon$ is not an upper bound of $C$, so $[a, L-\varepsilon]$ is contained in a finite union of sets $u_{\beta}$. So $[a, L]$ is contained in the above union of $u_{\beta}$, still finite. Contradiction.
+\newline
+$\therefore L \in C$
+\end{proof}
+
+\begin{proof}[Pf: $L=b$]
+\hfill
+\newline
+Similar argument: If $L \in u_{\beta}$ and $L \neq b$, then $\exists \varepsilon > 0 \suchthat [L, L+\varepsilon] \subseteq u_{\beta}$.
+\newline
+Then $L + \varepsilon \in C$, contradiction.
+\newline
+$\therefore L = b$.
+\end{proof}
+Therefore, $[a, b]$ is compact in $\bbR$.
+\end{proof}
+
+\begin{prop}
+A closed subset of a compact space is compact in the subspace topology.
+\end{prop}
+\begin{proof}
+Let $Y \subseteq X$, where $X$ is compact and $Y$ is closed.
+\newline
+Consider any open cover of $Y$, written as $\Set{u_{\alpha} \cap Y}_{\alpha \in I}$ where $u_{\alpha}$ is open in $X$.
+\newline
+Consider the cover $\{u_{\alpha}\}_{\alpha \in I} \cup (X-Y)$ which is an open cover in $X$ as $Y$ is closed. Since $X$ is compact, it has a finite subcover, say $v_1$, $v_2$, \dots $v_n$. Then 
+\begin{equation*}
+\{v_1\cap Y,v_2\cap Y,\dots v_n\cap Y\}
+\end{equation*}
+ is a finite subcover of the original open cover of $Y$.
+\newline
+$\therefore Y$ is also a compact set. 
+\end{proof}
+
+\begin{prop}
+If $f:X\mapsto Y$ is continuous and surjective, and $X$ is compact, then $Y$ also is compact.
+\end{prop}
+\begin{proof}
+Let $Y = \bigcup\limits_{\alpha \in I} u_{\alpha}$. Then 
+\begin{equation*}
+X = f^{-1}\left(\bigcup\limits_{\alpha \in I} u_{\alpha}\right) = \bigcup\limits_{\alpha \in I}f^{-1}(u_{\alpha})
+\end{equation*}
+Since $f$ is continuous and surjective.
+This has a finite subcover, say $f^{-1}(v_1),f^{-1}(v_2),\dots ,f^{-1}(v_n)$. Then 
+\begin{equation*}
+\{v_1, v_2, \dots v_n\}
+\end{equation*}
+is a finite open cover of $Y$. $\therefore  Y$ is compact.
+\end{proof}
+\begin{eg}
+A circle is compact since it is the continuous image of $[0, 1]$.
+\end{eg}
+
+\newpage
+\begin{prop}
+If $X$ and $Y$ are compact, then $X \times Y$ is compact.
+\end{prop}
+\begin{proof}
+Let $\bigcup\limits_{\alpha \in I} u_{\alpha}$ be open cover of $X  \times Y $.
+\newline
+If $(x, y) \in X \times Y$, then $(x, y) \in u_{\alpha}$ for some $\alpha \in I$. Therefore $\exists$ some $A_{xy} \times B_{xy}, \mbox{ containing } (x,y)$, lying in $u_{\alpha}$. 
+\newline
+Fix $x\in X$, and consider $\Set{B_{xy}|y \in Y}$, which is a open cover of $Y$.
+Take a finite subcover, say $\Set{B_{xy_1},B_{xy_2}, \dots, B_{xy_n}}$.
+\newline
+Set $A_x \vcentcolon = \bigcap\limits_{i=1}^{n}B_{xy_i}$. Then 
+\begin{equation*}
+A_x \times B_{xy_1},A_x \times B_{xy_2},\dots,A_x \times B_{xy_n}
+\end{equation*}
+cover $A_x \times Y$, and each $A_x \times B_{xy_i}$ is contained in some $u_{\alpha}$.
+\newline
+Now consider $\Set{A_x|x\in X}$, which has a finite cover, say $A_{x_1},A_{x_2}, \dots, A_{x_m}$. Then $\Set{A_{x_i}}$ cover $X \times Y$, so the corresponding $u_{\alpha} 's$ cover $X \times Y$.
+\end{proof}
+
+\begin{thm}[Heine-Borel]
+A subset of $\bbR^n$ is compact iff it is closed and bounded.
+\end{thm}
+\begin{proof}
+Let $X \subseteq \bbR^n$ be closed and bounded. Then $\exists r \in \bbR \suchthat X\subseteq [-r,r] \times [-r,r] \dots \times [-r,r]$, which is compact. 
+\newline
+As $X$ is closed in an compact subset,it therefore is compact.
+\newline
+Now suppose $X$ is compact.
+\begin{itemize}
+\item[{\bfseries $X$ is bounded}:] 
+Consider the open ball of radius $n \in \bbN$ around $0$ $B(n,0)$. Then
+\begin{equation*}
+\bigcup\limits_{n\in\bbN}B(n,0) = \bbR
+\end{equation*}
+Since $X$ is compact, there exists a finite sequence
+\begin{equation*}
+(n_i)_{i=1}^k \suchthat X \subseteq \bigcup\limits_{(n_i)}B(n_i, 0)
+\end{equation*}
+$\therefore \max({n_i})$ is an upper bound of $X$, implying $X$ is bounded.
+\item[{\bfseries $X$ is closed}:] 
+Assume, for sake of contradiction, $X$ is compact but not closed.
+\newline
+Let $x$ be a limit point of $X \suchthat x \notin X$. Accordingly $\forall r > 0, \overline{B}(r, x) \cap X \neq \varnothing$. Then
+$\Set{\bbR^n - \overline{B}(r,x)}$ is an open cover of $X$. That is,
+\begin{equation*}
+\bigcup\limits_{r\in \bbR}\left( \bbR^n - \overline{B}(r, x) \right) = \bbR - \{x\} \supseteq X
+\end{equation*}
+By compactness of $X$, there exists finite $\{r_i\}_{1\leqslant i\leqslant n} \suchthat X \subseteq \bigcup\limits_{i=1}^n\left( \bbR^n-\overline{B}(r_i,x) \right) = Y$.
+\newline
+However, it is easy to verify that $Y \cap B(\min(r_i), x) = \varnothing$, contradicting with assumption that $x$ is a limit point of $X$.
+\newline
+Therefore, $X$ is closed.
+\end{itemize}
+\end{proof}
+\end{document}
