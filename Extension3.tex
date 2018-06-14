@@ -13,8 +13,8 @@
 \newcommand{\bbN}{\mathbb{N}}
 \newcommand{\bbZ}{\mathbb{Z}}
 \newcommand{\bbQ}{\mathbb{Q}}
-\newcommand{\suchthat}{\operatorname{s.t.}}
-\newcommand{\ie}{\operatorname{i.e.}}
+\newcommand{\suchthat}{\operatorname{\enspace s.t. \enspace}}
+\newcommand{\ie}{\operatorname{\enspace i.e. \enspace}}
 \newcommand{\LL}{\operatorname{LL}}
 
 \theoremstyle{plain}
@@ -40,6 +40,7 @@
 \maketitle
 \setuldepth{relation}
 
+\section*{Addition}
 How can we make sense of ``$1+2 = 3$'' if $1 = \Set{\varnothing}$ and $2 = \Set{\varnothing, \Set{\varnothing}}$?
 The strategy is to define a function of ``addition of $m$'' for every $m \in \bbN$. 
 
@@ -61,32 +62,146 @@ The strategy is to define a function of ``addition of $m$'' for every $m \in \bb
 	\begin{equation*}
 		S_m' \vcentcolon = \bigcap\limits_{R\in S_m}R
 	\end{equation*}
-	which is the smallest relation with these properties. 
+	$S_m'$ is the smallest relation with the properties. 
 	\newline
-	We will show that $S_m'$ is indeed a function. It has the required properties by construction.
+	\par
+	We will {\bf show that $S_m'$ is indeed a function.} It has the required properties by construction.
 	\begin{enumerate}[(1)]
-	\item $\operatorname{Domain}(S_m') = \bbN$.
-		\newline
-		Let $p(n)$ be true if $\exists x \suchthat (n, x)\in S_m'$. $p(0)$ is true because $(0, m) \in S_m'$. 
-		\newline
-		Suppose $p(n)$ is true if $\exists x \in \bbN \suchthat (n, x) \in S_m'$. So $\forall R \in S_m$, $(n, x) \in R \implies (n^+, x^+) \in R \implies (n^+, x^+) \in S_m' \implies p(n^+)$ is true. So by induction, $\operatorname{Domain}(S_m') = \bbN$.
-	\item We want to show that if $(n, x), (n, y)$ are both in $S_m'$, then $x = y$.
-	\newline
-	Let $p(n)$ be true if $\forall r \in n, \exists! x \in \bbN \suchthat (r, x) \in S_m'$. Note that $p(0)$ is vacuously true.
-	\newline
+	\item \ul{We need to show  $\operatorname{Domain}(S_m') = \bbN$.}
+	\par
+	Let $p(n)$ be true if $\exists x \suchthat (n, x)\in S_m'$. It is obvious that $p(0)$ is true because $(0, m) \in S_m'$. 
+	Suppose $p(n)$ is true if $\exists x \in \bbN \suchthat (n, x) \in S_m'$. So $\forall R \in S_m$, $(n, x) \in R \implies (n^+, x^+) \in R \implies (n^+, x^+) \in S_m' \implies p(n^+)$ is true. 
+	\par
+	So by induction, $\operatorname{Domain}(S_m') = \bbN$.
+
+	\item \ul{We need to show that if $(n, x), (n, y)$ are both in $S_m'$, then $x = y$.}
+	\par
+	Let $p(n)$ be true if $\forall r \in n$, there exists a unique  $x \in \bbN \suchthat (r, x) \in S_m'$. Note that $p(0)$ is vacuously true.
+	\par
 	Suppose $p(n)$ is true, we want to show $p(n^+)$ is also true. Let $r \in n^+ = n \cup \Set{n}$. This means that $r = n $ or $ r \in n$.
-	\newline
 	If $r \in n$, we already know the statement is true; If $r = n$. Suppose that $(n, a) \in S_m'$ and $(n, b) \in S_m'$.
 	\begin{claim}
 		At most one of $(n,a)$ and $(n,b)$ can have a ``predecessor'' in $S_m'$. 
 	\end{claim}
-	Suppose $(p_1, x_1) \in S_m'$ and $(p_2, x_2) \in S_m' \suchthat (p_1^+, n_1^+) = (n, a)$ and $(p_2^+, n_2^+) = (n, b)$. Since $p_1^+ = p_2^+ = n$, we have $p_1 = p_2$ and $p_1 \in n \implies (p_1,x_1) \in S_m'$ and $(p_2, x_2) \in S_m'$, which implies $x_1 = x_2$.
-	\newline
+	Suppose $(p_1, x_1) \in S_m'$ and $(p_2, x_2) \in S_m' \suchthat (p_1^+, x_1^+) = (n, a)$ and $(p_2^+, x_2^+) = (n, b)$. Since $p_1^+ = p_2^+ = n$, we have $p_1 = p_2$ and $p_1 \in n$ 
+	$\implies (p_1,x_1) \in S_m'$ and $(p_2, x_2) \in S_m'$ imply $x_1 = x_2$.
 	So, $a = x_1^+$ and $b = x_2^+ \implies a = b$. If $a \neq b$, either $\nexists (p_1^+, x_1^+) = (n, a)$ or $\nexists (p_2^+, x_2^+) = (n, b)$.
-	\newline
-	Suppose (WLOG) $\nexists p_1 \suchthat (p_1^+, x_1^+) = (n, a)$ and $(p_1, x1) \in S_m'$, then we can \ul{remove} $(n, a)$ from $S_m'$ and we get a smaller relation with the same properties! This cannot happen.
-	\newline
-	So, $\exists! a \suchthat (n, a) \S_m'$, and so $p(n^+)$ also is true. Thi
+	\par
+	Suppose (WLOG) $\nexists p_1 \suchthat (p_1^+, x_1^+) = (n, a)$ and $(p_1, x_1) \in S_m'$, then we can \ul{remove} $(n, a)$ from $S_m'$ by defining $S_m'' \vcentcolon = S_m' - (n,a)$ and we get a smaller relation with the same properties! This cannot happen because $S_m'$ is the intersections of all $R$, which implies $implies S_m' \subset S_m''$ 
+	
 	\end{enumerate}
-\end{proof}<++>
+	\par	
+	So, by $(1)$ and $(2)$, $ \exists! a \suchthat (n, a) \in S_m'$, and so $p(n^+)$ also is true $\implies S_m'$ is a function with the desired properties $S_m$.
+\end{proof}
+
+\hfill
+\par
+We can now prove the following facts:
+\begin{enumerate}[(1)]
+	\item $\forall n \in \bbN$, $S_1(n) = n^+$.
+	\item $\forall n \in \bbN$, $S_0(n) = n$.
+	\item $\forall m, n, k \in \bbN$, we have $S_{S_m(n)}(k) = S_m\left( S_n(k) \right)$ (associativity)
+	\item $\forall m, n \in \bbN$, we have $ S_m(n) = S_n(m)$ (commutativity)
+\end{enumerate}
+All properties are proved by induction.
+
+\begin{enumerate}
+	\item [Proof of $(1)$]
+	Let $p(n)$ be true if $S_1(n) = n^+$. $S_1(0) = 1 = 0^+$. So $p(0)$ is true.
+	\newline
+	Suppose $p(n)$ is true. Then
+	\begin{equation*}
+	S_1(n^+) = \left[ S_1(n) \right]^+ = (n^+)^+
+	\end{equation*}
+	So $p(n^+)$ is true $\rightarrow$ induction.
+
+	\item [Proof of $(2)$]
+	Let $p(n)$ be true if $S_0(n) = n$. $p(0)$ is true because $S_0(0) = 0$.
+	\newline
+	Let $p(n)$ be true. Then 
+	\begin{equation*}
+	S_0(n^+) = \left[ S_0(n) \right]^+ = n^+
+	\end{equation*}
+	So $p(n+)$ also is true $\rightarrow $ induction.
+
+	\item[Proof of $(3)$]
+	Let $p(k)$ be true if $\forall m, n$ we have $S_{S_m(n)}(k) = S_m\left( S_n(k) \right)$.
+	For $k=0$, $S_{S_m(0)} = S_m(n)$; $S_m(S_{n}(0)) S_m(n) = S_{S_m(0)}$. SO $p(0)$ is true.
+	\newline
+	Suppose $p(k)$ is true. Then 
+	\begin{equation*}
+		S_{S_m(n)}(k^+) = \left[ S_{S_m(n)}(k) \right]^+ = \left[ S_m(S_n(k)) \right]^+ = S_m\left[ \left( S_n(k) \right)^+ \right] = S_m\left( S_n(k^+) \right)
+	\end{equation*}
+	So $p(k^+)$ is true$\rightarrow$ induction.
+
+	\item[Proof of $(4)$] 
+	Let $p(n)$ be true if $\forall m \in n$, we have $S_m(n) = S_n(m)$.
+	For $n = 0$, $S_m(0) = m = S_0(m)$. So $p(0)$ is true.
+	\newline
+	Suppose $p(n)$ is true.
+	\begin{equation*}
+	S_m(n^+) = \left[ S_m(n) \right]^+ = \left[ S_n(m) \right]^+ = S_n(m^+) = S_n(S_1(m)) = S_{S_n(1)}(m) = S_{S_1(n)}(m) = S_{n^+}(m)
+	\end{equation*}
+	So $p(n^+)$ is true $\rightarrow$ induction.
+\end{enumerate}
+
+	\hfill
+	\par
+	There are some more properties of $\bbN$.
+	\begin{enumerate}[(1)]
+		\item 
+		If $m, n \in \bbN$, $m \in n $ iff $m \subsetneq n$. 
+
+		\item 
+		If $m, n\in \bbN$, we say that $m < n$ if $m \in n$, and $m \leq n$ if $m \in n$ or $m = n$. Then $\forall M, N\in \bbN$, exactly one of the following is true  (Trichotomy):
+		\begin{equation*}
+			m < n \text{ \ul{or} } n < m \text{ \ul{or} } m = n
+		\end{equation*}
+
+		\item
+		For every $m, n \bbN$, we have $m \leq n$ iff there is a unique $k \in \bbN$ such that $m+k = n$
+
+		\item
+		For every $m, n, k \in \bbN$, if $n+m = n+k$ then $m = k$ (Cancellation). 
+	\end{enumerate}
+
+\section*{Subtraction and Multiplication}
+
+\begin{define}[Subtruction]
+	Given $m, n \bbN$, such that $m \leq n$, define $n - m$ to be the unique $k\in \bbN$ such that $m + k = n$	
+\end{define}
+
+\begin{rmk}
+	This satisfies the usual properties.
+\end{rmk}
+
+\hfill
+\par
+Multiplication is defined similarly to addition. Fix $m \in \bbN$, then $\exists$ a function $P_m:\bbN \mapsto \bbN$ with the following properties:
+\begin{enumerate}[(1)]
+	\item
+		$P_m(0)$ = 0
+	\item
+		$P_m(n^+) = P_m(n) + m$
+\end{enumerate}
+(Proved analogously to $S_m$)
+\newline
+We eventually write $P_m(n)$ as $m \cdot n$ or $mn$.
+
+\hfill
+\par
+Multiplication satisfies the following properties: $\forall m, n, k\in \bbN$
+\begin{enumerate}
+	\item 
+		$P_m(0) = 0$
+	\item
+		$P_1(n) = n$
+	\item
+		$P_m(n) = P_n(m)$ (commutativity)
+	\item
+		$P_m\left( P_n(k) \right) = P_{P_m(n)}(k)$ (associativity)
+	\item
+		$P_m(n + k) = P_m(k) + P_n(k)$ (distributivity)
+\end{enumerate}
+
 \end{document}
