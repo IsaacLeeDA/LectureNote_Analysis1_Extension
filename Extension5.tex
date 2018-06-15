@@ -1,0 +1,86 @@
+\documentclass[12pt]{amsart}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{paralist}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{braket}
+\usepackage{mathtools}
+\usepackage{soul}
+
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbZ}{\mathbb{Z}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\suchthat}{\operatorname{s.t.}}
+\newcommand{\ie}{\operatorname{i.e.}}
+\newcommand{\LL}{\operatorname{LL}}
+
+\theoremstyle{plain}
+\newtheorem*{prop}{Proposition}
+\newtheorem*{thm}{Theorem}
+\newtheorem*{cor}{Corollary}
+\newtheorem*{claim}{Claim}
+\newtheorem*{axm}{Axiom}
+\newtheorem*{lem}{Lemma}
+
+
+
+\theoremstyle{remark}
+\newtheorem*{rmk}{Remark}
+
+\theoremstyle{definition}
+\newtheorem*{define}{Definition}
+\newtheorem*{eg}{Example}
+
+\title{Analysis I Extension Lecture 5\\Construction of the Rational $\bbR$}
+
+\author{Asilata Bapat}
+
+\begin{document}
+
+\maketitle
+\setuldepth{document}
+
+The construction of the rational $\bbR$ is very similar to that of of the Integers $\bbZ$.
+\begin{define}
+	We let $Q$ be equivalence classes of ordered pairs of (certain) integers:
+	\begin{equation*}
+		Q \vcentcolon = \Set{(a,b) \in \bbZ \times \bbZ | b \neq 0}
+	\end{equation*}
+\end{define}
+
+\begin{rmk}
+	Remember, $0 = [(0,0)] \in \bbZ\cdots$
+\end{rmk}
+
+\begin{define}
+	$R\in Q \times Q$ is defined as follows:
+	\begin{equation*}
+		R = \Set{((a,b), (c,d)) \in Q \times Q | ad = bc}
+	\end{equation*}
+\end{define}
+\begin{claim}
+	$R$ is an equivalence relation
+\end{claim}
+
+\begin{enumerate}[(1)]
+	\item (Order)
+		Say $[(a,b)]\in Q$. We say that $[(a,b)] > 0$ if 
+		\begin{equation*}
+			b > 0 \mbox{ and } a > 0 \mbox{, \ul{or}} b < 0 \mbox{ and } a < 0
+		\end{equation*}
+		This is a total order on $Q$ and satisfies trichotomy.
+	\item (Distance)
+		Write $Q^{\geq 0}$ to be the set of rationals that are either $0$ or positive. We have  function $d: Q \times Q \mapsto Q^{\geq 0}$, defined as 
+		\begin{equation*}
+			d([(a,b)],[(c,d)]) = 
+			\begin{case}
+				
+			\end{case}<++>
+		\end{equation*}<++>
+\end{enumerate}<++>
+
+\end{document}
