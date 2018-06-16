@@ -65,22 +65,76 @@ The construction of the rational $\bbR$ is very similar to that of of the Intege
 \begin{claim}
 	$R$ is an equivalence relation
 \end{claim}
+\begin{proof}
+	Exercise.
+\end{proof}
 
+\begin{define}
+	The set of rationals, $\ie \bbQ$, as 
+	\begin{equation*}
+		\bbQ \vcentcolon = Q\bigg/ R= \Set{\mbox{equivalence classes of parts of integers } (a,b) \mbox{ with } b \neq 0}
+	\end{equation*}
+\end{define}
+
+\par
+\ul{Operations/Properties} of $\bbQ$ 
+\begin{enumerate}
+	\item 
+		Write $0 = [(0,1)]$ and $1 = [(1,1,)]$, and see that $0\neq 1$.
+	\item (Addition)
+		\begin{equation*}
+		[(a,b)] +_{\bbQ} [(c,d)] \vcentcolon = [(ad +_{\bbZ} bc, bd)]
+		\end{equation*}
+	\item (Multiplication)
+		\begin{equation*}
+			[(a,b)]\cdot [(b,c)] \vcentcolon = [(ac,bd)]
+		\end{equation*}
+		This is commutative, associative, and distributes over addition.
+	\item (Additive Inverse)
+		For any $[(a,b)]\in \bbQ$, there is some $[(c,d)] \in \bbQ \suchthat$ 
+		\begin{equation*}
+		[(a,b)] + [(c,d)] = 0 
+		\end{equation*}
+		In fact, $[(a,b)] = [(-c,d)]$
+	\item (Multiplication Inverse)
+		If $[(a,b)] \neq 0$ then there exists a $[(c,d)] \neq 0 \suchthat$ 
+		\begin{equation*}
+			[(a,b)] \cdot [(c,d)] = 1
+		\end{equation*}
+		In fact $[(c,d)] = [(b,a)]$. 
+	\item
+		$0$ is the additive identity and $1$ is the multiplicative identity
+\end{enumerate}
+
+\begin{define}[Field]
+	Any set $S$ together with elements $0,1 \in S$ and operations $+,\cdot:S \times \S \mapsto S$ satisfying the properties above is called a \ul{field}. So $\bbQ$ is a field.
+\end{define}
+
+\par
+There are some further properties of $\bbQ$
 \begin{enumerate}[(1)]
 	\item (Order)
-		Say $[(a,b)]\in Q$. We say that $[(a,b)] > 0$ if 
+		Say $[(a,b)]\in \bbQ$. We say that $[(a,b)] > 0$ if 
 		\begin{equation*}
-			b > 0 \mbox{ and } a > 0 \mbox{, \ul{or}} b < 0 \mbox{ and } a < 0
+			b > 0 \mbox{ and } a > 0 \mbox{, \ul{or} } b < 0 \mbox{ and } a < 0
 		\end{equation*}
-		This is a total order on $Q$ and satisfies trichotomy.
+		This is a total order on $\bbQ$ and satisfies trichotomy.
 	\item (Distance)
-		Write $Q^{\geq 0}$ to be the set of rationals that are either $0$ or positive. We have  function $d: Q \times Q \mapsto Q^{\geq 0}$, defined as 
+		Write $Q^{\geq 0}$ to be the set of rationals that are either $0$ or positive. We have  function $d: \bbQ \times \bbQ \mapsto \bbQ^{\geq 0}$, defined as 
 		\begin{equation*}
 			d([(a,b)],[(c,d)]) = 
-			\begin{case}
-				
-			\end{case}<++>
-		\end{equation*}<++>
-\end{enumerate}<++>
+			\begin{cases}
+				[(a,b)] - [(c,d)] \quad &\mbox{if } [(a,b)] \geqslant [(c,d)]\\	
+				[(c,d)] - [(a,b)] \quad &\mbox{otherwise}
+			\end{cases}
+		\end{equation*}
+		This function is a \ul{metric} in the following sense:
+		\begin{enumerate}[a.]
+			\item $d(x,y)\geqslant 0 \quad \forall x,y in \bbQ$
+			\item $d(x,y) = 0$ iff $x = y \quad \forall x,y \in \bbQ$ 
+			\item $d(x,y) = d(y,x)$, and 
+			\item $d(x,z) \leqslant d(x,y) + d(y,z)$
+		\end{enumerate}
+\end{enumerate}
 
 \end{document}
