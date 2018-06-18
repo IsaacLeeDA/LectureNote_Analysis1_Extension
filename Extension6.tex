@@ -1,0 +1,223 @@
+\documentclass[12pt]{amsart}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{paralist}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{braket}
+\usepackage{mathtools}
+\usepackage{soul}
+
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbZ}{\mathbb{Z}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\suchthat}{\operatorname{\thinspace s.t. \thinspace}}
+\newcommand{\ie}{\operatorname{i.e.}}
+\newcommand{\LL}{\operatorname{LL}}
+
+\theoremstyle{plain}
+\newtheorem*{prop}{Proposition}
+\newtheorem*{thm}{Theorem}
+\newtheorem*{cor}{Corollary}
+\newtheorem*{claim}{Claim}
+\newtheorem*{axm}{Axiom}
+\newtheorem*{lem}{Lemma}
+
+
+
+\theoremstyle{remark}
+\newtheorem*{rmk}{Remark}
+
+\theoremstyle{definition}
+\newtheorem*{define}{Definition}
+\newtheorem*{eg}{Example}
+
+\title{Analysis I Extension Lecture 6\\Construction of $\bbR$ through $\bbQ$}
+\author{Asilata Bapat}
+
+\begin{document}
+
+\maketitle
+\setuldepth{abc}
+
+Henceforth we write rationals as usual: $[(-3,5)] \rightarrow -\frac{3}{5}$.
+\begin{define}
+	A \ul{sequence} $s$ of numbers in $\bbQ$ is a function
+	\begin{equation*}
+		s: \bbN  \mapsto \bbQ
+	\end{equation*}
+\end{define}
+
+\begin{define}
+	A sequence $s$ of numbers in $\bbQ$ is called \ul{convergent to $q\in \bbQ$} if for every $n \in \bbN$ where $n \neq 0$, there is $m\in \bbN$ such that for each $M > m$ we have 
+	\begin{equation*}
+		d(a_M, q) < \frac{1}{n}
+	\end{equation*}
+	Especially, we say that a sequence $s$ is \ul{null} if $s \rightarrow 0$.
+\end{define}
+
+\begin{define}
+	A sequence $a$ of $\bbQ$ is called \ul{Cauchy} if for every $n \in \bbN$ where $n \neq 0$, there is $m \in \bbN$ such that for every $n \in \bbN$ where $n \neq 0$, there is a $m \in \bbN$ such that for every $P,M > m$, we have 
+	\begin{equation*}
+		d(a_P, a_Q) < \frac{1}{n}
+	\end{equation*}
+\end{define}
+
+\begin{thm}
+	If a sequence $s_n$ converges to $q\in \bbQ$, then  it is Cauchy.
+\end{thm}
+
+\begin{prop}
+	There exists Cauchy sequences in $\bbQ$ that are not convergent.
+\end{prop}
+
+\par
+We would like a enlargement of $\bbQ$, in which $Cauchy \iff convergent$
+\begin{define}
+	We will say a field $F$ is \ul{complete} if every Cauchy sequence converge.
+\end{define}
+
+\ul{Idea}: Given any $q\in \bbQ$, say $q = \frac{1}{2}$; consider the sequence $(q,q,q,\cdots)$. This is a Cauchy sequence with limit $q$.
+Also, $S_n = (q + \frac{1}{n})$, then $s_n \rightarrow q$.
+\newline
+Now let $s_n = 3,3.1,3.14,3.141,3.1415,\cdots$. This is a Cauchy sequence, but it probably does not converge in $\bbQ$. But we \ul{want} it to converge.
+
+\par
+Let 
+\begin{equation*}
+	R = \Set{\mbox{all Cauchy sequences of } \bbQ}
+\end{equation*}
+
+and let $\bbP(\bbN \times \bbQ)$ be the power set of $\bbN \times \bbQ = \mbox{all relations } \bbN \rightarrow \bbQ$. We look at 
+\begin{equation*}
+	\Set{F \in \bbP(\bbN \times \bbQ) | F \mbox{ is a function that defines a Cauchy sequence}}
+\end{equation*}
+
+We want all element of $R$ to be the representative for its ``limit'', even if it does not exist. However there is a problem:
+\newline
+$(1,2,2,2,\cdots)$ and $(2,2,2,2,\cdots)$ go to the same limit, but they are different sequences. The way to deal with it is to include equivalence relations. We say two sequence $(a_n)$ and $(b_n)$ are \ul{equivalent } (written as $(a_n) \sim (b_n)$) if their difference $(a_n - b_n)$ converge to $0$. 
+
+\begin{define}
+	We define real number $\bbR$ as
+	\begin{equation*}
+		\bbR \vcentcolon = R \bigg/\sim = \mbox{equivalence classes under this relation}
+	\end{equation*}
+\end{define}
+
+\begin{lem}
+	Every Cauchy sequence is bounded. This means there is some $M \suchthat |a_n| leqslant M$.  
+\end{lem}
+\begin{lem} Every Cauchy sequence $(a_n)$ that does not converge to $0$ is bounded away from $0$. Explicitly, this means that $\exists \varepsilon > 0 \mbox{ and } N \in \bbN \suchthat \forall n \in \bbN \mbox{ and } n > N$, $|a_n| > \varepsilon$  
+\end{lem}
+
+\begin{prop}
+	$\sim$ is an equivalence relation.
+\end{prop}
+\begin{proof}
+\hfill
+\newline
+	\begin{enumerate}
+		\item (Reflexivity)
+			$(a_n) \sim (a_n)$ because $(a_n - a_n)$ is the zero sequence.
+		\item (Symmetry)
+		If $(a_n) \sim (b_n)$ then $(a_n - b_n) \rightarrow 0$. From the definition, $(b_n - a_n) \rightarrow -0 = 0$. So $(b_n)\sim (a_n)$
+		\item (Transitivity)
+			Say $(a_n) \sim (b_n)$ and $(b_n) \sim (c_n)$. Then $\forall \varepsilon > 0$, $ \exists N_1 \in \bbN $ such that
+			\begin{itemize}[-]
+				\item 
+					$\forall n > N_1$ we have $|a_n - b_n| < \frac{\varepsilon}{2}$.
+				\item
+					$\forall \varepsilon > 0$, $\exists N_2 \in \bbN \suchthat \forall n > N_2$, we have $|b_n - c_n| < \frac{\varepsilon}{2}$
+			\end{itemize}
+			Now let $N = \max\{N_1, N_2\}$. So if $n > N$, then 
+			\begin{equation*}
+				|a_n - c_n| \leqslant |a_n - b_n| + |b_n - c_n| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
+			\end{equation*}
+			Since $\varepsilon$ is arbitrary, we see $(a_n - c_n) \rightarrow 0$. So $(a_n) \sim (c_n)$.
+	\end{enumerate}
+\end{proof}
+
+\par
+We now show that $\bbR$ is well-defined.
+\begin{proof}
+		$\bbQ$ is embedded into $\bbR$($\bbQ \xhookrightarrow[]{\quad i\quad} \bbR$). That is, given any rational number $q$ we can construct a sequence converging to $q$ as follows:
+		\begin{equation*}
+			q \mapsto [(q,q,q,\dots)]
+		\end{equation*}
+		If $p \neq q$, $i(p) \neq i(q)$ then $i(p) \neq i(q)$ because $[(p - q, p - q,\dots)] \neq [(0,0,0,\dots)]$
+\end{proof}
+
+Particular, in $\bbR$ we have a $0 = [(0,0,0,\dots)]$ and a $1 = [(1,1,1,1,\dots)]$, as shown above, therefore $0 \neq 1$.
+
+\par
+Properties of $\bbR$.[(1)]
+\begin{enumerate}
+	\item (Addition)
+		We say that: 
+		\begin{equation*}
+			[(a_n)] + [(b_n)] \vcentcolon = [(a_n+b_n)]
+		\end{equation*}
+		Then addition is well-defined, commutative, and associative. Also $[(a_n)] + 0 = [(a_n)]$
+	\item (Multiplication)
+		We say 
+		\begin{equation*}
+			[(a_n)]\cdot[(b_n)] = [(a_nb_n)]
+		\end{equation*}
+		\begin{claim}
+			Multiplication of $\bbR$ is well defined.
+		\end{claim}
+		\begin{proof}
+			Suppose that $[(a_n)] = [(c_n)]$ and $[(b_n)] = [(d_n)]$. We will show that $[(a_nb_n) = [(c_nd_n)]]$, meaning that the sequence $(a_nb_n - c_nd_n) \rightarrow 0$.
+			\newline
+			We know 
+			\begin{equation*}
+				(a_n - c_n) \rightarrow 0 \mbox{ and } (b_n - d_n) \rightarrow 0
+			\end{equation*}
+			Further, these are Cauchy sequences. Recall that if $(s_n)$ is Cauchy, then $\forall \varepsilon > 0$, $\exists N \in\bbN \suchthat \forall m,n > N$, we have $|s_m - s_n| < \varepsilon$
+			\newline
+			Fix some $\varepsilon$, the corresponding $N$, and some $n > N$. Then $\forall m > N$, we have
+			\begin{equation*}
+			s_m \leqslant |s_m - s_n| + |s_n| \leqslant \varepsilon + |s_n|
+			\end{equation*}
+			So the sequence is bonded above by the max of $\Set{|s_1|, |s_2|, \dots,|s_N|,\dots,|s_{n_1}|,|s_n| + \varepsilon}$.
+			Consider 
+			\begin{equation*}
+			\begin{split}
+			|a_n b_n - c_n d_n| &= |a_n b_n - b_n c_n + b_n c_n - c_n d_n| = |b_n(a_n - c_n) + c_n(b_n - d_n)|\\
+		&\leqslant |b_n||a_n - c_n| + |c_n||b_n - d_n|
+			\end{split}
+			\end{equation*}
+			Let $M$ be a positive upper bound for both $b_n$ and $c_n$. Then $\forall \varepsilon > 0$, . 
+			\begin{itemize}[-]
+				\item $\exists N_1 \suchthat$ if $n > N_1$, then $|a_n - c_n| < \frac{\varepsilon}{2M}$
+				\item $\exists N_2 \suchthat$ if $n > N_2$, then $|b_n - d_n| < \frac{\varepsilon}{2M}$
+			\end{itemize}
+			So if $N = \max\Set{N_1, N_2}$ and $n > N$, then 
+			\begin{equation*}
+				|a_n b_n - c_n d_n| < M\cdot \frac{\varepsilon}{2M} + M \cdot \frac{\varepsilon}{2M} = \varepsilon
+			\end{equation*}
+			So $|a_n - b_n| \rightarrow 0$, indicating $(a_n b_n) \sim (c_n d_n)$.
+			\newline
+			SO multiplication is well-defined.
+			\newline
+			Further, multiplication distributes  over addition; and $[(a_n)] \cdot 1 = [(a_n)]$.
+		\item (Division)
+			If $[(a_n)] \neq 0$, then $\exists$ some $(b_n) \suchthat$ $[(a_n b_n)] = 1$.
+			\begin{proof}
+				Suppose $[(a_n)] \neq 0$, which means that $(a_n)$ is Cauchy but \ul{does not converge} to $0$. So, by definition, $\exists \varepsilon > 0 \suchthat \forall N \in \bbN, \exists n > N \suchthat |a_n| > \varepsilon$
+				Now fix an $\varepsilon > 0$. So $\exists N \in bbN \suchthat \forall m,n > N$, we have $|a_m - a_n| < \frac{\varepsilon}{2}$.
+				\newline
+				Fix $n$ to be some natural number larger than $N, \suchthat |a_n| > \varepsilon$. Observe that 
+				\begin{equation*}
+					|a_n| < |a_n - a_m| + |a_m| < \frac{\varepsilon}{2}
+				\end{equation*}
+				This means that $\exists \varepsilon > 0$<++>
+			\end{proof}<++>
+		\end{proof}
+\end{enumerate}<++>
+
+
+\end{document}
