@@ -43,7 +43,7 @@
 \maketitle
 \setuldepth{abc}
 \section*{\bf Definition of $\bbR$}
-Henceforth we write rationals as usual: $[(-3,5)] \rightarrow -\frac{3}{5}$.
+Henceforth we write rationals as usual: $[(-3,5)] \rightarrow -\displaystyle \frac{3}{5}$.
 \begin{define}
 	A \ul{sequence} $s$ of numbers in $\bbQ$ is a function
 	\begin{equation*}
@@ -60,7 +60,7 @@ Henceforth we write rationals as usual: $[(-3,5)] \rightarrow -\frac{3}{5}$.
 \end{define}
 
 \begin{define}
-	A sequence $s$ of $\bbQ$ is called \ul{Cauchy} if for every $n \in \bbN$ where $n \neq 0$, there is $m \in \bbN$ such that for every $n \in \bbN$ where $n \neq 0$, there is a $m \in \bbN$ such that for every $P,M > m$, we have 
+	A sequence $s$ of $\bbQ$ is called \ul{Cauchy} if for every $n \in \bbN$ where $n \neq 0$, there is $m \in \bbN$ such that for every $n \in \bbN$ where $n \neq 0$, there is a $m \in \bbN$ such that for every $P,Q > m$, we have 
 	\begin{equation*}
 		d(s_P, s_Q) < \frac{1}{n}
 	\end{equation*}
@@ -80,8 +80,8 @@ We would like a enlargement of $\bbQ$, in which $Cauchy \iff convergent$
 	We will say a field $F$ is \ul{complete} if every Cauchy sequence converge.
 \end{define}
 
-\ul{Idea}: Given any $q\in \bbQ$, say $q = \frac{1}{2}$; consider the sequence $(q,q,q,\cdots)$. This is a Cauchy sequence with limit $q$.
-Also, $S_n = (q + \frac{1}{n})$, then $s_n \rightarrow q$.
+\ul{Idea}: Given any $q\in \bbQ$, say $q = \displaystyle\frac{1}{2}$; consider the sequence $(q,q,q,\cdots)$. This is a Cauchy sequence with limit $q$.
+Also, $S_n = (q + \displaystyle \frac{1}{n})$, then $s_n \rightarrow q$.
 \par
 Now let $s_n = 3,3.1,3.14,3.141,3.1415,\cdots$. This is a Cauchy sequence, but it probably does not converge in $\bbQ$. But we \ul{want} it to converge.
 
@@ -127,9 +127,9 @@ The way to deal with it is to include equivalence relations. We say two sequence
 			Say $(a_n) \sim (b_n)$ and $(b_n) \sim (c_n)$. Then $\forall \varepsilon > 0$, $ \exists N_1 \in \bbN $ such that
 			\begin{itemize}[-]
 				\item 
-					$\forall n > N_1$ we have $|a_n - b_n| < \frac{\varepsilon}{2}$.
+					$\forall n > N_1$ we have $|a_n - b_n| < \displaystyle \frac{\varepsilon}{2}$.
 				\item
-					$\forall \varepsilon > 0$, $\exists N_2 \in \bbN \suchthat \forall n > N_2$, we have $|b_n - c_n| < \frac{\varepsilon}{2}$
+					$\forall \varepsilon > 0$, $\exists N_2 \in \bbN \suchthat \forall n > N_2$, we have $|b_n - c_n| < \displaystyle \frac{\varepsilon}{2}$
 			\end{itemize}
 			Now let $N = \max\{N_1, N_2\}$. So if $n > N$, then 
 			\begin{equation*}
@@ -190,7 +190,7 @@ In particular, in $\bbR$ we have a $0 = [(0,0,0,\dots)]$ and a $1 = [(1,1,1,1,\d
 		&\leqslant |b_n||a_n - c_n| + |c_n||b_n - d_n|
 			\end{split}
 			\end{equation*}
-			Let $M$ be a positive upper bound for both $b_n$ and $c_n$. Then $\forall \varepsilon > 0$, . 
+			Let $M$ be a positive upper bound for both $b_n$ and $c_n$. Then $\forall \varepsilon > 0$, 
 			\begin{itemize}[-]
 				\item $\exists N_1 \suchthat$ if $n > N_1$, then
 					\begin{equation*}
@@ -214,23 +214,23 @@ In particular, in $\bbR$ we have a $0 = [(0,0,0,\dots)]$ and a $1 = [(1,1,1,1,\d
 			If $[(a_n)] \neq 0$, then $\exists$ some $(b_n) \suchthat$ $[(a_n b_n)] = 1$.
 			\begin{proof}
 				Suppose $[(a_n)] \neq 0$, which means that $(a_n)$ is Cauchy but \ul{does not converge} to $0$. So, by definition, $\exists \varepsilon > 0 \suchthat \forall N \in \bbN, \exists n > N \suchthat |a_n| > \varepsilon$
-				Now fix an $\varepsilon > 0$. So $\exists N \in \bbN \suchthat \forall m,n > N$, we have $|a_m - a_n| < \frac{\varepsilon}{2}$.
+				Now fix an $\varepsilon > 0$. So $\exists N \in \bbN \suchthat \forall m,n > N$, we have $|a_m - a_n| < \displaystyle \frac{\varepsilon}{2}$.
 				\newline
 				Fix $n$ to be some natural number larger than $N, \suchthat |a_n| > \varepsilon$. Observe that 
 				\begin{equation*}
 					|a_n| < |a_n - a_m| + |a_m| < \frac{\varepsilon}{2}
 				\end{equation*}
-				This means that $\exists \varepsilon > 0$ and $N_1 \in \bbN \suchthat \forall m > N_1$, we have $a_m > \frac{\varepsilon}{2}$; in particular, $a_m \neq 0$ for sufficiently large $m$.
+				This means that $\exists \varepsilon > 0$ and $N_1 \in \bbN \suchthat \forall m > N_1$, we have $a_m > \displaystyle \frac{\varepsilon}{2}$; in particular, $a_m \neq 0$ for sufficiently large $m$.
 				\newline
 				Define the sequence $b_n$ as follows:
 				\begin{itemize}[-]
 					\item 
 						If $n \leqslant N_1$, set $b_n = 1$.
 					\item
-						If $n > N_1$, set $b_n = \frac{1}{a_n}$.
+						If $n > N_1$, set $b_n = \displaystyle \frac{1}{a_n}$.
 				\end{itemize}
 
-				Notice that $b_n$ is Cauchy because the sequence $\frac{1}{a_n}$ is Cauchy. Moreover, we can compute $(a_n b_n)$
+				Notice that $b_n$ is Cauchy because the sequence $\displaystyle \frac{1}{a_n}$ is Cauchy. Moreover, we can compute $(a_n b_n)$
 				\begin{itemize}[-]
 					\item
 						If $n \leq N$, $ a_n b_n = a_n$
@@ -247,9 +247,9 @@ In particular, in $\bbR$ we have a $0 = [(0,0,0,\dots)]$ and a $1 = [(1,1,1,1,\d
 		\begin{proof}
 			Suppose $[(a_n) \neq (b_n)]$, so $a_n - b_n \nrightarrow 0$. So $\exists \varepsilon > 0 \suchthat \forall N\in \bbN$, $\exists n > N \suchthat |a_n - b_n| > \varepsilon$.
 			\newline
-			Fix this $\varepsilon$. As before, we see that $\exists N_1 \in \bbN \suchthat \forall m,n > N_1$, $|a_m - a_n| < \frac{\varepsilon}{2}$ and $\exists N_2\in \bbN \suchthat \forall m,n > N_2, |b_m - b_n| < \frac{\varepsilon}{2}$.
+			Fix this $\varepsilon$. As before, we see that $\exists N_1 \in \bbN \suchthat \forall m,n > N_1$, $|a_m - a_n| < \displaystyle \frac{\varepsilon}{2}$ and $\exists N_2\in \bbN \suchthat \forall m,n > N_2, |b_m - b_n| < \displaystyle \frac{\varepsilon}{2}$.
 			\newline
-			Let $M = \max\Set{N_1,N_2}$. Fix $n > M \suchthat |a_n - b_n| > \varepsilon$. Suppose WLOG $a_n > b_n$, so $a_n - b_n > \varepsilon$. Then $a_m \geqslant a_n - \frac{\varepsilon}{2}$, and $b_m \leqslant b_n + \frac{\varepsilon}{2}$. 
+			Let $M = \max\Set{N_1,N_2}$. Fix $n > M \suchthat |a_n - b_n| > \varepsilon$. Suppose WLOG $a_n > b_n$, so $a_n - b_n > \varepsilon$. Then $a_m \geqslant a_n - \displaystyle \frac{\varepsilon}{2}$, and $b_m \leqslant b_n + \displaystyle \frac{\varepsilon}{2}$. 
 			\newline
 			Therefore,
 		\begin{equation*}
@@ -276,15 +276,13 @@ In particular, in $\bbR$ we have a $0 = [(0,0,0,\dots)]$ and a $1 = [(1,1,1,1,\d
 				\item 
 					$u_0 = u$, and $l_0 = l$.
 				\item
-					For each $n \in \bbN$, 
-					\begin{equation*}
-						m_n = \frac{u_n + l_n}{2} 
-					\end{equation*}
+					For each $n \in \bbN$, $m_n = \displaystyle \frac{u_n + l_n}{2}$.
+					
+				\item	
 					If $m_n$ is an upper bound for $S$, set
 					\begin{equation*}
 						u_{n+1} = m_n \mbox{ and } l_{n+1} = l_n
 					\end{equation*}
-				\item
 					Otherwise, set 
 					\begin{equation*}
 						u_{n+1} = u_n \mbox{ and } l_{n+1} = m_n
@@ -293,30 +291,15 @@ In particular, in $\bbR$ we have a $0 = [(0,0,0,\dots)]$ and a $1 = [(1,1,1,1,\d
 			Observations,
 			\begin{enumerate}[(a)]
 				\item 
-					$\forall n \in \bbN$,
-					\begin{equation*}
-						u_{n+1} \leqslant u_n
-					\end{equation*}
+					$\forall n \in \bbN$, $u_{n+1} \leqslant u_n$.
 				\item
-					$\forall n \in \bbN$,
-					\begin{equation*}
-						l_{n+1} \geqslant l_n
-					\end{equation*}
+					$\forall n \in \bbN$, $l_{n+1} \geqslant l_n$.
 				\item
-					$\forall n \in \bbN$,
-					\begin{equation*}
-						u_n \geqslant l_n 
-					\end{equation*}
+					$\forall n \in \bbN$, $u_n \geqslant l_n$.
 				\item
-					By induction,
-					\begin{equation*}
-						u_{n+1} - l_{n+1} = \frac{u-l}{2^n} 
-					\end{equation*}
+					By induction, $u_{n+1} - l_{n+1} = \displaystyle \frac{u-l}{2^n}$.
 				\item
-					If $m> n$, then
-					\begin{equation*}
-						|u_m - u_n| \leqslant \frac{u-l}{2^{n-1}}
-					\end{equation*}
+					If $m> n$, then	$|u_m - u_n| \leqslant \displaystyle \frac{u-l}{2^{n-1}}$.
 					\noindent This shows $u_n$ is Cauchy.
 				\item
 					Similiarly, $l_n$ is Cauchy.
