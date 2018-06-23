@@ -1,0 +1,178 @@
+\documentclass[12pt]{amsart}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{paralist}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{braket}
+\usepackage{mathtools}
+\usepackage{soul}
+\usepackage{parskip}
+
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbZ}{\mathbb{Z}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\suchthat}{\operatorname{\thinspace s.t. \thinspace}}
+\newcommand{\ie}{\operatorname{\thinspace i.e. \thinspace}}
+\newcommand{\LL}{\operatorname{LL}}
+
+\theoremstyle{plain}
+\newtheorem*{prop}{Proposition}
+\newtheorem*{thm}{Theorem}
+\newtheorem*{cor}{Corollary}
+\newtheorem*{claim}{Claim}
+\newtheorem*{axm}{Axiom}
+\newtheorem {AXM}{Axiom}
+\newtheorem*{lem}{Lemma}
+
+\theoremstyle{remark}
+\newtheorem*{rmk}{Remark}
+
+\theoremstyle{definition}
+\newtheorem*{define}{Definition}
+\newtheorem*{eg}{Example}
+
+\title[Introduction to Axiomatic Set Theory]
+	{Analysis I Extension Lectur\\1. Introduction to Axiomatic Set Theory}
+\author{Asilata Bapat}
+
+\begin{document}
+
+\maketitle
+\setuldepth{abcd}
+
+Calculus is typically done on $\bbR$, $\bbR^n$, $\bbC^n$, why not on $\bbN$ or $\bbQ$
+\begin{itemize}[-]
+	\item $\bbN$ is unsuitable because it is ``discrete''. Metric on $\bbN$ does not have arbitrarily small numbers. That is, if $d(m,n) < 1$, then $m = n$.
+	\item $\bbQ$ is unsuitable because it has ``holes'' in it. There are unequal, arbitrarily close rational numbers. However, it is not a 	     \ul{complete} metric space. More about this later, but for example, $\Set{x \in \bbQ | x^2 < 2}$ does not have a least upper bound in $\bbQ$ so there are bounded increasing sequences in $\bbQ$ that does not converge in $\bbQ$.
+\end{itemize}
+To do this properly, we should start at the very beginning: $\bbR$ is constructed from $\bbQ$, which is constructed from $\bbZ$, which is constructed from $\bbN$. Which is constructed from \dots ?
+
+\par
+One approach (standard) is axiomatic set theory.
+\begin{define}
+	A set is an object $S$ $\suchthat$ for each $x$, we either have $x \in S$ or $x \notin S$. That is, $x$ is an element of $S$, or $x$ is not an element of $S$, but not both.
+\end{define}
+A set can be specified by listing its elements, like $\Set{1, 2, 3}$, or by specification, like $\Set{x \in \bbN| x \text{ is prime.}}$. This definition works fine --- until it doesn't!
+\newline
+\begin{eg}[Russell's Paradox]
+Let $S$ be defined as follows:
+\begin{equation*}
+	S = \Set{T| T \notin T}
+\end{equation*}
+Question: Is $S \in S$?
+If yes, then by its definition, $S$ is a set $\suchthat S \notin S \implies S \notin S$, contradiction;
+If no, then $S \notin S$, matching the requirement for elements of $S \implies S \in S$, contradiction.
+\end{eg}
+\section*{\bf Zermelo-Fraenkel Set Theory (ZFC)} 
+(Typically written in the language of first order logic, however we'll use a mix of logic and English.)
+
+\begin{AXM}[Axiom of Extension]
+	Two sets are equal iff they have the same elements:
+\begin{equation*}
+	X = Y \mbox{ iff } \forall z(z\in X \iff z\in Y) 
+\end{equation*}
+\end{AXM}
+
+\begin{AXM}[Axiom of Existence]
+	The ``empty set'' is a set. That is, $\varnothing$ exists and has the property that $\forall z(z \notin \varnothing)$.
+\end{AXM}
+
+\begin{AXM}[Axiom of Pairing]
+	If $X$ and $Y$ are sets, then there is a set $\Set{X, Y}$.
+	\begin{eg}
+		$\Set{1, 2}$ and $\Set{2, 3}$ pair to $\Set{\Set{1,2}, \Set{2,3}}$.
+	\end{eg}
+\end{AXM}
+
+\begin{AXM}[Axiom of Union]
+	If $S$ is any set, then the ``union over all elements of $S$'' is a set. That is, there is a set whose elements are all $x$ such that $x$ belongs to some elements of $S$.
+	\begin{eg}
+	\begin{equation*}
+		\Set{\Set{1,2},\Set{2,3}} \rightarrow \Set{1,2,3}
+	\end{equation*}
+	\end{eg}
+\end{AXM}
+
+\begin{AXM}[Axiom of Intersection]
+	If $S$ is a set, the ``intersection over all elements of $S$'' exists
+\end{AXM}
+
+\begin{AXM}[Axiom of Foundation]
+	Every $X \neq \varnothing$ contains a member $Y$ such that $X \cap Y = \varnothing$.
+	(Roughly speaking, a sequence $z_1 \ni z_2 \ni \dots$ must always terminate.)
+\end{AXM}
+Consequence of failure of the axiom:
+\newline
+$\forall Y_1 \in X, X \cap Y_1 \neq \varnothing$. So $\exists Y_2\in X \cap Y_1 \implies X \cap Y_2 \neq \varnothing$ and so on!
+
+\begin{AXM}[Axiom Schema of Specification]
+	We can build sets using ``set builder'' notation as subsets of a known set that satisfies certain predicate. A predicate can be seen as a kind of function outputting ``TRUE'' or ``FALSE''.
+\end{AXM}
+\begin{eg}
+	$\Set{x \in \bbN| x > 2}$ is the set $\Set{3,4,5,\dots}$ or $\Set{x \in \Set{\varnothing, \Set{\varnothing}}| x \neq \varnothing}$ is the set $\Set{\Set{\varnothing}}$.
+\end{eg}
+
+\begin{AXM}[Axiom of Power Set]
+	If $S$ is a set, then $\mathbb{P}(S)$ is the collection of all subsets of $S$, which is a set	
+\end{AXM}
+
+Based on previous axioms, we can construct the Cartesian Product, as follows:
+\begin{define}[Cartesian Product]
+	We define a ordered pair $(a, b)$
+	\begin{equation*}
+		(a, b) \vcentcolon = \Set{\Set{a}, \Set{a, b}}
+	\end{equation*}
+	Then we define
+	\begin{equation*}
+		A \times B = \Set{(a,b) | a \in A \text{ and } b \in B}
+	\end{equation*}
+\end{define}
+
+Based on Cartesian Product, we can define the notation of Function
+\begin{define}[Function]
+	Let $A$, $B$ be sets. A function $f:A \mapsto B$ is an element of $\mathbb{P}(A \times B)$ such that 
+	\begin{enumerate}[(1)]
+		\item for every $a \in A$, there is some $b \in B$ such that $(a, b) \in f$.
+		\item For every $a \in A$, if $b_1$ and $b_2$ such that $(a_1, b_1) \in f$ and $a_1, b_2 \in f$, then $b_1 = b_2$.
+	\end{enumerate}
+\end{define}
+
+\begin{AXM}[Axiom of Infinity]
+	Let $X$ be a set. Define $\operatorname{succ}(X) = X^+ =  X \cup \Set{X}$. 
+	\newline
+	There is a set with the properties:
+	\begin{enumerate}[(1)]
+		\item $\varnothing \in S$
+		\item If $X \in S$, then $\operatorname{succ}(X) \in S$
+	\end{enumerate}
+\end{AXM}
+\begin{eg}
+	\hfill
+	\newline
+	$\operatorname{succ}(\varnothing) = \Set{\varnothing}$
+	\newline
+	$\Set{\varnothing}^+ = \Set{\varnothing} \cup \Set{\Set{\varnothing}} = \Set{\varnothing, \Set{\varnothing}}$
+\end{eg}
+	In particular, $S$ cannot have finitely many elements!
+\begin{define}[Choice Function]
+	A \ul{Choice Function} $f$ defined on a collection $X$ of none empty sets is a function with the property that if $a \in X$ then $f(a) \in a$
+\end{define}
+
+\begin{eg}
+	$f(x) = \min(x)$ gives $f(\Set{1,2,3}) = 1 \rightarrow f$ is defined on $\bbP(\bbN)$.
+\end{eg}
+
+\begin{AXM}[Axiom of Choice]
+	Choice functions always exist for any $X$
+\end{AXM}
+
+The axiom states that if $x$ is any set of nonempty sets, then there is a choice function on $x$. This is equivalent to the well-ordering principle: 
+\begin{thm}[Well-ordering Pricinple]
+	For any set $x$, there is a binary relation $R(\leqslant)$ which well-orders $x$: every non-empty subset of $x$ has a smallest element.
+\end{thm}
+\end{document}

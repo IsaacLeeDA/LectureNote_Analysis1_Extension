@@ -1,0 +1,323 @@
+\documentclass[12pt]{amsart}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{paralist}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{braket}
+\usepackage{mathtools}
+\usepackage{soul}
+\usepackage{parskip}
+
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbZ}{\mathbb{Z}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\suchthat}{\operatorname{\thinspace s.t. \thinspace}}
+\newcommand{\ie}{\operatorname{\thinspace i.e. \thinspace}}
+\newcommand{\LL}{\operatorname{LL}}
+
+\theoremstyle{plain}
+\newtheorem*{prop}{Proposition}
+\newtheorem*{thm}{Theorem}
+\newtheorem*{cor}{Corollary}
+\newtheorem*{claim}{Claim}
+\newtheorem*{axm}{Axiom}
+\newtheorem {AXM}{Axiom}
+\newtheorem*{lem}{Lemma}
+
+\theoremstyle{remark}
+\newtheorem*{rmk}{Remark}
+
+\theoremstyle{definition}
+\newtheorem*{define}{Definition}
+\newtheorem*{eg}{Example}
+
+\title[Construction of $\bbR$]{Analysis I Extension Lecture\\6. Construction of $\bbR$ through $\bbQ$}
+\author{Asilata Bapat}
+
+\begin{document}
+
+\maketitle
+\setuldepth{abcd}
+\section*{Definition of $\bbR$}
+Henceforth we write rationals as usual: $[(-3,5)] \rightarrow -\displaystyle \frac{3}{5}$.
+\begin{define}
+	A \ul{sequence} $s$ of numbers in $\bbQ$ is a function
+	\begin{equation*}
+		s: \bbN  \mapsto \bbQ
+	\end{equation*}
+\end{define}
+
+\begin{define}
+	A sequence $s$ of numbers in $\bbQ$ is called \ul{convergent to $q\in \bbQ$} if for every $n \in \bbN$ where $n \neq 0$, there is $m\in \bbN$ such that for each $M > m$ we have 
+	\begin{equation*}
+		d(s_M, q) < \frac{1}{n}
+	\end{equation*}
+	Especially, we say that a sequence $s$ is \ul{null} if $s \rightarrow 0$.
+\end{define}
+
+\begin{define}
+	A sequence $s$ of $\bbQ$ is called \ul{Cauchy} if for every $n \in \bbN$ where $n \neq 0$, there is $m \in \bbN$ such that for every $n \in \bbN$ where $n \neq 0$, there is a $m \in \bbN$ such that for every $P,Q > m$, we have 
+	\begin{equation*}
+		d(s_P, s_Q) < \frac{1}{n}
+	\end{equation*}
+\end{define}
+
+\begin{thm}
+	If a sequence $s_n$ converges to $q\in \bbQ$, then  it is Cauchy.
+\end{thm}
+
+\begin{prop}
+	There exists Cauchy sequences in $\bbQ$ that are not convergent.
+\end{prop}
+
+\par
+We would like a enlargement of $\bbQ$, in which $Cauchy \iff convergent$
+\begin{define}
+	We will say a field $F$ is \ul{complete} if every Cauchy sequence converge.
+\end{define}
+
+\ul{Idea}: Given any $q\in \bbQ$, say $q = \displaystyle\frac{1}{2}$; consider the sequence $(q,q,q,\cdots)$. This is a Cauchy sequence with limit $q$.
+Also, $S_n = (q + \displaystyle \frac{1}{n})$, then $s_n \rightarrow q$.
+\par
+Now let $s_n = 3,3.1,3.14,3.141,3.1415,\cdots$. This is a Cauchy sequence, but it probably does not converge in $\bbQ$. But we \ul{want} it to converge.
+
+\par
+Let 
+\begin{equation*}
+	R = \Set{\mbox{all Cauchy sequences of } \bbQ}
+\end{equation*}
+
+\noindent and let $\bbP(\bbN \times \bbQ)$ be the power set of $\bbN \times \bbQ = \mbox{all relations } \bbN \rightarrow \bbQ$. We look at 
+\begin{equation*}
+	\Set{F \in \bbP(\bbN \times \bbQ) | F \mbox{ is a function that defines a Cauchy sequence}}
+\end{equation*}
+
+We want all element of $R$ to be the representative for its ``limit'', even if it does not exist. However there is a problem: $(1,2,2,2,\cdots)$ and $(2,2,2,2,\cdots)$ go to the same limit, but they are different sequences.
+The way to deal with it is to include equivalence relations. We say two sequence $(a_n)$ and $(b_n)$ are \ul{equivalent } (written as $(a_n) \sim (b_n)$) if their difference $(a_n - b_n)$ converges to $0$. 
+
+\begin{define}
+	We define real number $\bbR$ as
+	\begin{equation*}
+		\bbR \vcentcolon = R \bigg/\sim\thinspace\thinspace = \mbox{ equivalence classes under this relation}
+	\end{equation*}
+\end{define}
+
+\begin{lem}
+	Every Cauchy sequence is bounded. This means there is some $M \suchthat |a_n| \leqslant M$.  
+\end{lem}
+\begin{lem} Every Cauchy sequence $(a_n)$ that does not converge to $0$ is bounded away from $0$. Explicitly, this means that $\exists \varepsilon > 0 \mbox{ and } N \in \bbN \suchthat \forall n \in \bbN \mbox{ and } n > N$, $|a_n| > \varepsilon$  
+\end{lem}
+
+\begin{prop}
+	$\sim$ is an equivalence relation.
+\end{prop}
+\begin{proof}
+\hfill
+\newline
+	\begin{enumerate}
+		\item (Reflexivity)
+			$(a_n) \sim (a_n)$ because $(a_n - a_n)$ is the zero sequence.
+		\item (Symmetry)
+		If $(a_n) \sim (b_n)$ then $(a_n - b_n) \rightarrow 0$. From the definition, $(b_n - a_n) \rightarrow -0 = 0$. So $(b_n)\sim (a_n)$
+		\item (Transitivity)
+			Say $(a_n) \sim (b_n)$ and $(b_n) \sim (c_n)$. Then $\forall \varepsilon > 0$, $ \exists N_1 \in \bbN $ such that
+			\begin{itemize}[-]
+				\item 
+					$\forall n > N_1$ we have $|a_n - b_n| < \displaystyle \frac{\varepsilon}{2}$.
+				\item
+					$\forall \varepsilon > 0$, $\exists N_2 \in \bbN \suchthat \forall n > N_2$, we have $|b_n - c_n| < \displaystyle \frac{\varepsilon}{2}$
+			\end{itemize}
+			Now let $N = \max\{N_1, N_2\}$. So if $n > N$, then 
+			\begin{equation*}
+				|a_n - c_n| \leqslant |a_n - b_n| + |b_n - c_n| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
+			\end{equation*}
+			Since $\varepsilon$ is arbitrary, we see $(a_n - c_n) \rightarrow 0$. So $(a_n) \sim (c_n)$.
+	\end{enumerate}
+\end{proof}
+
+\par
+We now show that $\bbR$ is well-defined.
+\begin{proof}
+		$\bbQ$ is embedded into $\bbR$($\bbQ \xhookrightarrow[]{\thinspace i\thinspace} \bbR$). That is, given any rational number $q$ we can construct a sequence converging to $q$ as follows:
+		\begin{equation*}
+			q \mapsto [(q,q,q,\dots)]
+		\end{equation*}
+		If $p \neq q$, $i(p) \neq i(q)$ then $i(p) \neq i(q)$ because $[(p - q, p - q,\dots)] \neq [(0,0,0,\dots)]$
+\end{proof}
+
+In particular, in $\bbR$ we have a $0 = [(0,0,0,\dots)]$ and a $1 = [(1,1,1,1,\dots)]$, as shown above, therefore $0 \neq 1$.
+
+\par
+\section*{Properties of $\bbR$}
+
+\begin{enumerate}[(1)]
+	\item (Addition)
+		We say that: 
+		\begin{equation*}
+			[(a_n)] + [(b_n)] \vcentcolon = [(a_n+b_n)]
+		\end{equation*}
+		Then addition is well-defined, commutative, and associative. Also $[(a_n)] + 0 = [(a_n)]$
+	\item (Multiplication)
+		We say 
+		\begin{equation*}
+			[(a_n)]\cdot[(b_n)] = [(a_nb_n)]
+		\end{equation*}
+		\begin{claim}
+			Multiplication of $\bbR$ is well defined.
+		\end{claim}
+		\begin{proof}
+			Suppose that $[(a_n)] = [(c_n)]$ and $[(b_n)] = [(d_n)]$. We will show that $[(a_nb_n) = [(c_nd_n)]$, meaning that the sequence $(a_nb_n - c_nd_n) \rightarrow 0$.
+			\newline
+			We know 
+			\begin{equation*}
+				(a_n - c_n) \rightarrow 0 \mbox{ and } (b_n - d_n) \rightarrow 0
+			\end{equation*}
+			Further, these are Cauchy sequences. Recall that if $(s_n)$ is Cauchy, then $\forall \varepsilon > 0$, $\exists N \in\bbN \suchthat \forall m,n > N$, we have $|s_m - s_n| < \varepsilon$
+			\newline
+			Fix some $\varepsilon$, the corresponding $N$, and some $n > N$. Then $\forall m > N$, we have
+			\begin{equation*}
+			s_m \leqslant |s_m - s_n| + |s_n| \leqslant \varepsilon + |s_n|
+			\end{equation*}
+			So the sequence is bonded above by the max of $\Set{|s_1|, |s_2|, \dots,|s_N|,\dots,|s_{n_1}|,|s_n| + \varepsilon}$.
+			Consider 
+			\begin{equation*}
+			\begin{split}
+			|a_n b_n - c_n d_n| &= |a_n b_n - b_n c_n + b_n c_n - c_n d_n| = |b_n(a_n - c_n) + c_n(b_n - d_n)|\\
+		&\leqslant |b_n||a_n - c_n| + |c_n||b_n - d_n|
+			\end{split}
+			\end{equation*}
+			Let $M$ be a positive upper bound for both $b_n$ and $c_n$. Then $\forall \varepsilon > 0$, 
+			\begin{itemize}[-]
+				\item $\exists N_1 \suchthat$ if $n > N_1$, then
+					\begin{equation*}
+						|a_n - c_n| < \frac{\varepsilon}{2M}
+					\end{equation*}
+				\item $\exists N_2 \suchthat$ if $n > N_2$, then 
+					\begin{equation*}
+						|b_n - d_n| < \frac{\varepsilon}{2M}
+					\end{equation*}
+			\end{itemize}
+			So if $N = \max\Set{N_1, N_2}$ and $n > N$, then 
+			\begin{equation*}
+				|a_n b_n - c_n d_n| < M\cdot \frac{\varepsilon}{2M} + M \cdot \frac{\varepsilon}{2M} = \varepsilon
+			\end{equation*}
+			So $|a_n - b_n| \rightarrow 0$, indicating $(a_n b_n) \sim (c_n d_n)$.
+			\newline
+			So multiplication is well-defined.
+		\end{proof}
+			Further, multiplication distributes  over addition; and $[(a_n)] \cdot 1 = [(a_n)]$.
+		\item (Division)
+			If $[(a_n)] \neq 0$, then $\exists$ some $(b_n) \suchthat$ $[(a_n b_n)] = 1$.
+			\begin{proof}
+				Suppose $[(a_n)] \neq 0$, which means that $(a_n)$ is Cauchy but \ul{does not converge} to $0$. So, by definition, $\exists \varepsilon > 0 \suchthat \forall N \in \bbN, \exists n > N \suchthat |a_n| > \varepsilon$
+				Now fix an $\varepsilon > 0$. So $\exists N \in \bbN \suchthat \forall m,n > N$, we have $|a_m - a_n| < \displaystyle \frac{\varepsilon}{2}$.
+				\newline
+				Fix $n$ to be some natural number larger than $N, \suchthat |a_n| > \varepsilon$. Observe that 
+				\begin{equation*}
+					|a_n| < |a_n - a_m| + |a_m| < \frac{\varepsilon}{2}
+				\end{equation*}
+				This means that $\exists \varepsilon > 0$ and $N_1 \in \bbN \suchthat \forall m > N_1$, we have $a_m > \displaystyle \frac{\varepsilon}{2}$; in particular, $a_m \neq 0$ for sufficiently large $m$.
+				\newline
+				Define the sequence $b_n$ as follows:
+				\begin{itemize}[-]
+					\item 
+						If $n \leqslant N_1$, set $b_n = 1$.
+					\item
+						If $n > N_1$, set $b_n = \displaystyle \frac{1}{a_n}$.
+				\end{itemize}
+
+				Notice that $b_n$ is Cauchy because the sequence $\displaystyle \frac{1}{a_n}$ is Cauchy. Moreover, we can compute $(a_n b_n)$
+				\begin{itemize}[-]
+					\item
+						If $n \leq N$, $ a_n b_n = a_n$
+					\item
+						If $n > N$, $a_n b_n = 1$
+				\end{itemize}
+				So $\forall n > N, a_n b_n = 1$. This means that $[(a_n b_n)] = 1$. Therefore every nonzero element of $\bbR$ has an inverse. 
+		\end{proof}
+		\item (Order)
+		Let $[(a_n)]$ and $[(b_n)] \in \bbR$. We say $[(a_n)] \geqslant [(b_n)]$ iff either $[(a_n)] = [(b_n)]$, or $\exists N \in \bbN \suchthat \forall n > N$, $a_n \geqslant b_n$.
+		\begin{claim}
+			This is a totoal order on $\bbR$
+		\end{claim}
+		\begin{proof}
+			Suppose $[(a_n) \neq (b_n)]$, so $a_n - b_n \nrightarrow 0$. So $\exists \varepsilon > 0 \suchthat \forall N\in \bbN$, $\exists n > N \suchthat |a_n - b_n| > \varepsilon$.
+			\newline
+			Fix this $\varepsilon$. As before, we see that $\exists N_1 \in \bbN \suchthat \forall m,n > N_1$, $|a_m - a_n| < \displaystyle \frac{\varepsilon}{2}$ and $\exists N_2\in \bbN \suchthat \forall m,n > N_2, |b_m - b_n| < \displaystyle \frac{\varepsilon}{2}$.
+			\newline
+			Let $M = \max\Set{N_1,N_2}$. Fix $n > M \suchthat |a_n - b_n| > \varepsilon$. Suppose WLOG $a_n > b_n$, so $a_n - b_n > \varepsilon$. Then $a_m \geqslant a_n - \displaystyle \frac{\varepsilon}{2}$, and $b_m \leqslant b_n + \displaystyle \frac{\varepsilon}{2}$. 
+			\newline
+			Therefore,
+		\begin{equation*}
+			a_m - b_m \geqslant a_n - \frac{\varepsilon}{2} - b_n - \frac{\varepsilon}{2} \geqslant 0
+		\end{equation*}
+		So, $\forall m > M$, $a_m \geqslant b_m$.
+		\end{proof}
+
+		\item (Completeness)
+			We first introduce the definition of Least Upper Bound, as follows: 
+			\begin{define}[Least Upper Bound]
+				Let $S \subseteq \bbR$ be non-empty. 
+				\begin{itemize}[ ]
+					\item A number $x\in \bbR$ is an \ul{upper bound} for $S$ if $\forall s\in S$, we have $x \geqslant s$.
+					\item A number $x\in \bbR$ is the \ul{least upper bound} for $S$ if $\forall y$ upper bound of $S$, we have $x \leqslant y$.
+				\end{itemize}
+			\end{define}
+		\begin{thm}
+			Every bounded set of reals that has a upper bound has a least upper bound.
+		\end{thm}
+		\begin{proof}
+			Let $S \subseteq \bbR$ be nonempty. Let $u\in \bbR$ be an upper bound for $S$. Assume that $u$ is rational (by increasing if required). Choose some $l \in \bbQ \suchthat l < s$ for \ul{some} $s \in S$. We will define sequence $u_n$ and $l_n$, of rationals as follows:
+			\begin{enumerate}[(i)]
+				\item 
+					$u_0 = u$, and $l_0 = l$.
+				\item
+					For each $n \in \bbN$, $m_n = \displaystyle \frac{u_n + l_n}{2}$.
+					
+				\item	
+					If $m_n$ is an upper bound for $S$, set
+					\begin{equation*}
+						u_{n+1} = m_n \mbox{ and } l_{n+1} = l_n
+					\end{equation*}
+					Otherwise, set 
+					\begin{equation*}
+						u_{n+1} = u_n \mbox{ and } l_{n+1} = m_n
+					\end{equation*}
+			\end{enumerate}
+			Observations,
+			\begin{enumerate}[(a)]
+				\item 
+					$\forall n \in \bbN$, $u_{n+1} \leqslant u_n$.
+				\item
+					$\forall n \in \bbN$, $l_{n+1} \geqslant l_n$.
+				\item
+					$\forall n \in \bbN$, $u_n \geqslant l_n$.
+				\item
+					By induction, $u_{n+1} - l_{n+1} = \displaystyle \frac{u-l}{2^n}$.
+				\item
+					If $m> n$, then	$|u_m - u_n| \leqslant \displaystyle \frac{u-l}{2^{n-1}}$.
+					\noindent This shows $u_n$ is Cauchy.
+				\item
+					Similiarly, $l_n$ is Cauchy.
+				\item
+					$\forall s\in S$, $u_n \geqslant s$, so $[(u_n)] \geqslant s$ for all $s\in S$.
+					\newline
+					$\implies[(u_n)]$ is an upper bound.
+				\item
+					$[(l_n)]$ is never a upper bound for $S$.
+				\item
+					$[(l_n)] = [(u_n)]$ because the difference goes to $0$.
+			\end{enumerate}
+
+			Now we claim that $[(u_n)]$ is a least upper bound for $S$. Suppose now, $\exists b \in \bbN$ which is an upper bound for $S$ and $[(u_n)]>b$. So $[(l_n)] > b$. So $\exists n \in \bbN \suchthat l_n > b$. However, since $l_n$ is not an upper bound for $S$, $b$ cannot be one.
+			
+		\end{proof}
+\end{enumerate}
+
+
+\end{document}

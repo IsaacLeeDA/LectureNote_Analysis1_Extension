@@ -1,0 +1,102 @@
+\documentclass[12pt]{amsart}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{paralist}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{braket}
+\usepackage{mathtools}
+\usepackage{soul}
+\usepackage{parskip}
+
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbZ}{\mathbb{Z}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\suchthat}{\operatorname{\thinspace s.t. \thinspace}}
+\newcommand{\ie}{\operatorname{\thinspace i.e. \thinspace}}
+\newcommand{\LL}{\operatorname{LL}}
+
+\theoremstyle{plain}
+\newtheorem*{prop}{Proposition}
+\newtheorem*{thm}{Theorem}
+\newtheorem*{cor}{Corollary}
+\newtheorem*{claim}{Claim}
+\newtheorem*{axm}{Axiom}
+\newtheorem {AXM}{Axiom}
+\newtheorem*{lem}{Lemma}
+
+\theoremstyle{remark}
+\newtheorem*{rmk}{Remark}
+
+\theoremstyle{definition}
+\newtheorem*{define}{Definition}
+\newtheorem*{eg}{Example}
+
+\title[Construction of $\bbN$]
+	{Analysis I Extension Lectur\\2. Construction of $\bbN$}
+\author{Asilata Bapat}
+\begin{document}
+\maketitle
+\setuldepth{abcd}
+
+\begin{rmk}
+	Remember: In this world, everything is strictly a set.
+\end{rmk}
+
+Start with $0$. We define $0 \vcentcolon = \varnothing$.
+Recall $\operatorname{succ}(x) \vcentcolon = x \cup \Set{x}$. 
+Accordingly,
+\begin{align*}
+	1 &\vcentcolon = \varnothing \cup \Set{\varnothing} = \operatorname{succ}(\varnothing) = \Set{\varnothing}\\
+	2 &\vcentcolon = \operatorname{succ}(1) = \operatorname{succ}(\Set{\varnothing}) = \Set{\varnothing} \cup \Set{\Set{\varnothing}} = \Set{\varnothing, \Set{\varnothing}}\\
+	3 &\vcentcolon = \operatorname{succ}(2) = \Set{\varnothing, \Set{\varnothing}} \cup \Set{\Set{\varnothing, \Set{\varnothing}}} = \Set{\varnothing, \Set{\varnothing}, \Set{\varnothing, \Set{\varnothing}}}\\
+	\vdots
+\end{align*}
+
+\ul{But what is $\bbN$?} We can define $\bbN$ by using the Axiom of Infinity --- We want $\bbN$ to contain $0 = \varnothing$, successor of $0$, the successor of that, and so on, and nothing else. 
+\newline
+
+Let $S$ be a set such that $\varnothing \in S$ and if $x \in S$ then $\operatorname{sucss}(x) \in S$. However, $S$ \ul{could} be a lot bigger than $\bbN$, so we have to do some more work. 
+
+\begin{define}
+	\begin{align*}
+		I_S &= \Set{T \in \mathbb{P}(S)| \varnothing \in T \mbox{ and } x \in T,\operatorname{succ}(x) \in S}\\
+		\bbN &= \Set{x \in S | \forall T \in I_S, x \in T} =  \bigcup\limits_{u \in I_S} u
+	\end{align*}
+\end{define}
+That is $I_S$ is set of all inductive subset of $S$. $I_S \neq \varnothing$ because $S \in I_S$.
+
+\begin{thm}[Principle of Mathmetical Induction]
+	Let $p$ be a predicate (function that returns TRUE/FALSE defined on $\bbN$.
+		Assume that $p(0)$ is true and $\forall k \in \bbN$, $p(k) \implies p(\operatorname{succ}(k))$, then $p(n)$ holds for all $n \in \bbN$.
+\end{thm}
+
+\begin{proof}
+	Fix $p$, with the above properties, and set $S \vcentcolon = \Set{n \in \bbN | p(n)}$. We want to show $S = \bbN$. $\ie$ the element of $S$ are exactly the element of $\bbN$.
+	\newline
+	We observe that $S$ is inductive. Specifically,
+	\begin{enumerate}[(1)]
+		\item $0 \in S$ because $p(0) = p(\varnothing)$ holds.
+		\item If $x \in S$, it means $p(x)$ holds. But $p$ has the property that $p(x) \implies p(x^+)$. Then by definition of $S$, $x^+ \in S$.
+	\end{enumerate}
+	By $(1)$ and $(2)$, $S$ is inductive, and therefore $\bbN \subseteq S$.
+	By the definition of $S$, it is a subset of $\bbN$, therefore $S \subseteq \bbN$.
+	\newline
+	$\therefore S = N$ 
+\end{proof}
+
+\begin{thm}
+	If $m, n$ are two natural numbers such that $m^+ = n^+$, then $m = n$.
+\end{thm}
+
+\begin{lem}
+	Let $x, n \in \bbN$. If $x \in n$, then $x \subset n$.
+\end{lem}
+\begin{proof}
+	Define $p(n)$ as $p(n) = \forall x(x\in n \implies x \subset n)$
+\end{proof}
+\end{document}

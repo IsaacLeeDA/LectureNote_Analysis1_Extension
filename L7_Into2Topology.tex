@@ -1,0 +1,260 @@
+\documentclass[12pt]{amsart}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{paralist}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{braket}
+\usepackage{mathtools}
+\usepackage{soul}
+\usepackage{parskip}
+
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbZ}{\mathbb{Z}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\suchthat}{\operatorname{\thinspace s.t. \thinspace}}
+\newcommand{\ie}{\operatorname{\thinspace i.e. \thinspace}}
+\newcommand{\LL}{\operatorname{LL}}
+
+\theoremstyle{plain}
+\newtheorem*{prop}{Proposition}
+\newtheorem*{thm}{Theorem}
+\newtheorem*{cor}{Corollary}
+\newtheorem*{claim}{Claim}
+\newtheorem*{axm}{Axiom}
+\newtheorem {AXM}{Axiom}
+\newtheorem*{lem}{Lemma}
+
+\theoremstyle{remark}
+\newtheorem*{rmk}{Remark}
+
+\theoremstyle{definition}
+\newtheorem*{define}{Definition}
+\newtheorem*{eg}{Example}
+
+\title[Point-Set Topology]
+{Analysis I Extension Lecture\\7. Topology(Point-Set Topology)}
+\author{Asilata Bapat}
+
+\begin{document}
+\maketitle
+\setuldepth{abcd}
+
+\section*{Introduction}
+So far the class has discussed metric spaces, such as $\bbR$ and $\bbR^n$. Recall some basic definitions [Say $X$ a metric space]
+\begin{itemize}
+	\item 
+		The open ball of radius $\varepsilon$ around $p\in X$, denoted $B(p,\varepsilon)$, is 
+		\begin{equation*}
+			B(p, \varepsilon) = \Set{x \in X | d(x,p) < \varepsilon}
+		\end{equation*}
+	\item
+		A subset $Y \subseteq X$ is \ul{open} if $\forall y \in Y$, there is some $\varepsilon \in \bbR$ such that $B(y,\varepsilon) \subseteq X$.
+	\item
+		A subset $Z \subseteq X$ is \ul{closed} if $X\backslash Z$ is open.
+	\item A \ul{neighbourhood} of $x \in X$ is an open set $u$ containing $X$.
+\end{itemize}
+
+Notice the following facts (Of course there are many other observations).
+\begin{itemize}
+	\item 
+		An arbitrary union of open subset of $X$ is open. (Also a finite $\cap$).
+	\item
+		Consequently, an arbitrary intersection of closed sets of $X$ is closed.
+\end{itemize}
+
+A \ul{topological space} is supposed to generalise all above notions.
+
+\begin{define}
+	A \ul{Topological Space} consists of a pair $(X, O)$, where $X$ is a set and $O$ is a subset of the power set of $X$, together with the following conditions:
+	\begin{enumerate}[$(1)$]
+		\item
+			$\varnothing \in O$ and $X \in O$.
+		\item
+			An arbitrary union of elements of $O$ is also an element of $O$.
+		\item
+			A finite intersection of elements of $O$ is also an element of $O$
+	\end{enumerate}
+
+	Given $(X,O)$, we say that $Y \subseteq X$ is \ul{open} iff $Y \in O$. We say that $Z\subseteq X$ is \ul{closed} iff $(X\backslash Y) \in O$.
+\end{define}
+\begin{rmk}
+	$X$ need not have metric\ldots 
+\end{rmk}
+
+\begin{eg}
+	\hfill
+	\begin{enumerate}[$(1)$]
+		\item
+			Let $X = \Set{1,2,3}$; Then $O = \Set{\varnothing, \Set{1,2,3}}$ [or $X$ is any set, $O = \Set{\varnothing,X}$]
+		\item
+			Let $X$ be any set and $O = \bbP(X)$.
+		\item
+			$X = \Set{1,2,3}$; $O = \Set{\varnothing}, \Set{1}, \Set{1,2}, \Set{1,3}, \Set{1,2,3}$
+		\item
+			Let $X$ be any metric space; Let $O$ be the set of open subsets of $X$.
+	\end{enumerate}
+\end{eg}
+
+\section*{Basis for Topological Space}
+
+\begin{define}
+	Let $(X, O)$ be a topological space. A subset $B \subseteq O$ is called a \ul{basis} for this topology if:
+	\begin{enumerate}[$(1)$]
+	\item Every $v \in O$ is a union of elements from $B$. Consequently,
+	\item For every $u\in O$, there is some $v \in B \suchthat v \subseteq u$  
+	\end{enumerate}
+\end{define}
+
+\begin{eg}
+	For $X = \bbR$ as before, we can take $B = \Set{v|v \text{ is open interval in } \bbR}$. 
+\end{eg}
+
+\par
+In fact we can define the topological space by specifying a basis $B$, the set $O$ then consists of all possible unions of elements of $B$.
+
+\begin{eg}[Lower-Limit Topology]
+	Once again take $X = \bbR$, but we take a different $O$: Set $B = \Set{[a,b)| a,b\in \bbR}$, so that $O$ consists of unions of these half-open intervals. This is called the \ul{lower-limit topology } on $\bbR$.
+\end{eg}
+
+\begin{prop}
+	Any interval $(a,b)$ is open in the lower limit topology. Therefore, any set open in the usual metric topology is open in the Lower Limit topology on $\bbR$.	
+\end{prop}
+
+\begin{proof}
+	Consider the intervals $\left[a + \displaystyle\frac{1}{n}, b\right)$ for $n \geqslant 1$. These are open in $(\bbR, O_{\LL})$. Their union is all points of $(a,b) \implies (a, b)$ is open in $R_{LL}$.
+\end{proof}
+
+\par
+$O_{\text{metric}} \subseteq O_{\LL}$ because $B_{\text{metic}} \subseteq B_{\LL}$. We say that the lower-limit topology is \ul{finer} than the metric topology - it has more sets.
+\begin{rmk}
+	Is $O_{\text{metric}} = O_{\LL}$? Specifically, IS $[a, b)$ open in $\bbR_{\text{metric}}$?
+	\newline
+	To answer this, we will need some more definitions and lemmas 
+\end{rmk}
+
+\begin{define}
+	Given $(X, O)$, we say that $Y \subseteq X$ is \ul{closed} [in this topology] if $X - Y$ is open; $\ie X - Y \in O$ 
+\end{define}
+
+We have the following analogies of the axioms in terms of closed sets: 
+
+\begin{axm}
+	If $\Phi$ is the set of all closed sets, then
+	\begin{enumerate}[(1)]
+		\item $\varnothing \in \Phi$ and $X \in \Phi$.
+		\item Arbitrary intersections of closed sets are closed.
+		\item \ul{Finite} unions of closed sets are closed.
+	\end{enumerate}
+\end{axm}
+
+\begin{define}[Interior, Boundary, and Limit point]
+Let $A \subseteq X$, and suppose that $x \in X$. Then there is the following trichotomy:
+\begin{enumerate}[$(1)$]
+	\item $\exists u \in O \suchthat x \in u $ and $u \subseteq A$, or
+	\item $\exists u \in O \suchthat x \in u $ and $u \subseteq X - A$, or
+	\item $\forall u \in O \suchthat x \in u $, we have $u \cap A \neq \varnothing$ and $u \cap (X - A) \neq \varnothing$.
+\end{enumerate}
+If $(1)$ holds, we say $x$ is in the \ul{interior} of $A$.
+\newline
+If $(2)$ holds, we say $x$ is in the \ul{interior} of $X - A$.
+\newline
+If $(3)$ holds, we say $x$ is in the \ul{boundary} of $X$ and $X - A$.
+\newline
+The set of all points where either $(1)$ and $(3)$ holds, $\ie$ $\operatorname{interior}(A) \cup \operatorname{boundary}(A)$, is called the set of \ul{limit points} of $A$.
+\end{define}
+
+\begin{eg}
+	In $\bbR_{\text{metric}}$, let $A = [a, b)$, where $a < b$, then
+	\begin{enumerate}
+		\item $\operatorname{int}(A) = (a, b)$
+		\item $\operatorname{boundary}(A) = \Set{a, b}$
+		\item $\operatorname{int}(X-A) = (-\infty, a) \cup (b, \infty)$
+	\end{enumerate}
+\end{eg}
+
+\begin{define}[Closure]
+	The set of limit points of $A\subseteq X$ is called the closure of $A$, denoted by $\overline{A}$.
+\end{define}
+
+\begin{prop}
+	Let $A \subset X$, then
+	\begin{enumerate} [(a)]
+		\item $\operatorname{int}(A)$ is open.
+		\item $\overline{A}$ is closed.
+		\item $A$ is open iff $A = \operatorname{int}(A)$.
+		\item $A$ is closed iff $A = \overline{A}$.
+	\end{enumerate}
+\end{prop}
+
+\begin{rmk}
+	$O_{\LL} \not\subseteq O_{\text{metric}}$ since $[a, b)$ is not the union of open intervals. What are some closed sets of $R_{\LL}$? Does there exist a metric on $\bbR$ whose associated topology is $(\bbR, O_{\LL})$?  
+\end{rmk} 
+
+\begin{eg}[Finite-Complement Topology]
+
+	Let $X = \bbR$, and let
+	\begin{equation*}
+		O = \Set{Y \subseteq X | X - Y \text{ is finite}}
+	\end{equation*}
+	Such topological space is called Complement-Finite Topology.
+\end{eg}
+
+\section*{Subspace Topology}
+If $(X, O)$ is a topological space and $Y \subseteq X$ is any set, we can define a topology on $Y$ as follows:
+\begin{equation*}
+	O_Y = \Set{U\subset Y | \exists V \in O \text{ where } U = V \cap Y}
+\end{equation*}
+In this case, we say $Y$ is a \ul{subspace} of $X$.
+\begin{lem}
+	Given $Y \subset X$ a subspace, and any $A \subseteq Y$, the closure of $A$ in $Y$ is $\overline{A} \cap Y$.
+\end{lem}
+
+\begin{proof}
+	Let $y$ be a limit point of $A$ in $Y$, then there exists an open set $U_y$ of $y \suchthat y \in Y$ and $U_y \cap A \neq \varnothing$. But $A \subseteq Y$, and $U_y = V \cap Y$ for some open $V$ of $X$. So $U_y \cap A = (V\cap Y)\cap A = V \cap A$. But $y$ is in $\overline{A}$, so $\forall V \in O \suchthat y \in V$, we have $V \cap A \neq \varnothing$.   
+\end{proof}
+
+\section*{Continuity}
+\begin{define}[Continuity]
+	Let $X$ and $Y$ be topological space. A function $f: X \mapsto Y$ is to be \ul{continuous} if $\forall v$ open in $Y$, we have $f^{-1}(Y)$ is open in $X$.
+	\newline
+	Equivalently, $\forall Z \subset Y$ closed, $f^{-1}(Z)$ is closed in $X$.
+	Equivalently, given $B_Y$, for all $v \subseteq Y \suchthat v \in B_Y$, $f^{-1}(v)$ is open in $X$. 
+\end{define}
+
+\begin{lem}
+	If $f:X \mapsto Y$ and $g: Y \mapsto Z$ are continuous, then $(gf):X \mapsto Z$ is also continuous.
+\end{lem}
+
+\begin{lem}
+	If $f:X \mapsto Y$ is continuous and $A \subseteq X$ is a subspace, then $f|_A: A \mapsto Y$ is continuous.
+\end{lem}
+\begin{define}[Homeomorphism]
+	A continuous map $f:X \mapsto Y$ is a \ul{homeomorphism} if it is one-to-one and onto, and also $f^{-1}:Y \mapsto X$ is continuous.
+\end{define}
+\section*{Product topology}
+Let $X$ and $Y$ be topological spaces, with open sets $O_X$ and $O_Y$ respectively. We can define a topology on their Cartesian product, called the \ul{product topology}, as follows:
+\begin{define}
+	A \ul{basis} for the product topology on $X \times Y$ is $B_{X \times Y} \vcentcolon = O_X \times O_Y$. So if $U \in O_X$ and $V \in O_Y$, then $U \times V$ is open in $X \times Y$.
+\end{define}
+
+\begin{rmk}
+	THE CONVERSE NEED NOT HOLD.
+\end{rmk}
+
+\begin{eg}
+	Let $\bbR^2 = \bbR \times \bbR$,and define 
+	\begin{equation*}
+		\Delta = \Set{(x,x)| x \in \bbR}
+	\end{equation*}
+	$\Delta$ is closed, so its complement $\bbR^2 - \Delta$ is open in $\bbR^2$. However, the complement cannot be written as $U\times V$ for $U,V$ open in $\bbR$.
+\end{eg}
+\begin{eg}
+Define a ``cylinder'' space inside $\bbR^3$. In $\bbR^2$, we can have a ``annulus''. These two spaces are homeomorphic, and they are homeomorphic to ($S'\times [0,1]$). 
+\end{eg}
+
+\end{document}

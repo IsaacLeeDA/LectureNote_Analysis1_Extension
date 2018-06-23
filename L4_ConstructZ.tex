@@ -1,0 +1,127 @@
+\documentclass[12pt]{amsart}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{paralist}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{braket}
+\usepackage{mathtools}
+\usepackage{soul}
+\usepackage{parskip}
+
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbZ}{\mathbb{Z}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\suchthat}{\operatorname{\thinspace s.t. \thinspace}}
+\newcommand{\ie}{\operatorname{\thinspace i.e. \thinspace}}
+\newcommand{\LL}{\operatorname{LL}}
+
+\theoremstyle{plain}
+\newtheorem*{prop}{Proposition}
+\newtheorem*{thm}{Theorem}
+\newtheorem*{cor}{Corollary}
+\newtheorem*{claim}{Claim}
+\newtheorem*{axm}{Axiom}
+\newtheorem {AXM}{Axiom}
+\newtheorem*{lem}{Lemma}
+
+\theoremstyle{remark}
+\newtheorem*{rmk}{Remark}
+
+\theoremstyle{definition}
+\newtheorem*{define}{Definition}
+\newtheorem*{eg}{Example}
+
+\title[Construction of the $\bbZ$]
+	{Analysis I Extension Lectur\\4. Construction of the Integers $\bbZ$}
+\author{Asilata Bapat}
+\begin{document}
+
+\maketitle
+\setuldepth{abcd}
+
+\section*{Construction of $\bbZ$}
+(Equivalence classes of pairs of naturals)
+\newline
+Let $Z = \bbN\times \bbN$. Define a relation $R$ on $Z \times Z$ ($R \subseteq Z \times Z$) as follows:
+\begin{equation*}
+R \vcentcolon = \Set{ \left( (a,b),(c,d) \right) \in Z \times Z) | a+d = b+c}
+\end{equation*}
+\begin{eg}
+$\left( (3,1),(4,2) \right) \in R$ and $\left( (1,5),(5,9) \right) \in R$
+
+\end{eg}
+\begin{claim}
+$R$ is an equivalence relations:
+\end{claim}
+\begin{enumerate}[(1)]
+	\item (Reflexivity) 
+		Since $a+b = b+a\quad \forall a,b \in \bbN$, we see that $\forall a, b \in \bbN$, the pair $((a,b), (a,b))$ in $R$.
+	\item (Symmetry)
+		If $((a,b), (c,d))\in R$ then $a+d = b+c$, so $c+a = d+b$ and so $((c,d), (a,b))\in R$
+	\item (Transitivity)
+		Suppose $((a+b),(c+d))\in R$ and $((c,d),(p,g)) \in R$. Then $a+b = b + c $ and $c + q = d + p$. After adding these and some manipulations, we see that 
+		\begin{equation*}
+			(a+q) + (c+d) = (b+p) + (c+d)
+		\end{equation*}
+		By cancellation , we have $a+q = b+ p$, so $((a,b),(p,q)) \in R$
+\end{enumerate}
+If $x \in Z$, write
+\begin{equation*}
+	[x] \vcentcolon = \Set{ y \in Z | (x,y) \in R }
+\end{equation*}
+Then $[x] \subseteq Z$ and $x \in [x]$, so $[x] \neq \varnothing$. This is the \ul{equivalence class} of $x$. $\bbZ$ is partitioned into disjoint, nonempty equivalence classes, so:
+\begin{define}
+	\begin{equation*}
+	\begin{split} 
+		\bbZ \vcentcolon = Z \bigg/ R &= \Set{ S \in \bbP(Z)| S = [x] \mbox{ for some } x \in Z}\\
+		&=  \Set{\mbox{all equivalence classes of $R$}}
+	\end{split}
+	\end{equation*}
+\end{define}
+\begin{eg}
+	$[(0,1)] = [(3,4)]$
+\end{eg}
+
+\par
+There is an injective function $i:\bbN \mapsto \bbZ$ given by $n \mapsto [(n,0)]$.
+
+\section*{The properties of $\bbZ$}
+\begin{enumerate}[(1)]
+	\item (Addition)
+		$[(a,b)] + [(c,d)] \vcentcolon = [(a +_{\bbN} c, b +_{\bbN} d)]$ 
+	\item (Negative)
+		$-[(a,b)] \vcentcolon = [(b,a)]$, and $[(a,b)] + [(b,a,)] = [(0,0)]$
+	\item (Subtraction)
+		$[(a,b)] - [(c,d)] \vcentcolon = [(a,b)] + [(c,d)] = [(a+d,b+c)]$
+	\item (Order Relation)
+		We say $[(a,b)] < [(,d)]$ if $a + d < b + c$. Then this is a well-defined, total order. That is, if $[(a,b)]$ and $[(c,d)]$ are in $\bbZ$, then we have a trichotomy:
+		\begin{equation*}
+			[(a,b)] < [(c,d)] \mbox{ or } [(c,d)] < [(a,b)] \mbox{ or } [(a,b)] = [(c,d)]
+		\end{equation*}
+
+	\item (Multiplication)
+		$[(a,b)] \cdot [(c,d)] \vcentcolon = [(ac+bd, ad + bc)]$
+		\newline
+		This is commutative, associative, and distributes over addition.
+	\item (Absolute Value)
+		\begin{equation*}
+			|[a - b]| \vcentcolon = 
+			\begin{cases}
+				a - b \quad &\mbox{if } a \geq b\\
+				b - a \quad &\mbox{otherwise}
+			\end{cases}
+		\end{equation*}
+\end{enumerate}
+Henceforth, we write $[(a,b)]$ as follows:
+\begin{itemize}[-]
+	\item
+		If $a \geq b$, we replace it by $(a - b) \rightarrow$ Subtraction in $\bbN$
+	\item
+		If $a < b$, we replace it by $-(b - a ) \rightarrow$  subtraction in $\bbN$
+\end{itemize}
+\end{document}
